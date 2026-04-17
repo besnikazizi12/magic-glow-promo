@@ -130,6 +130,29 @@ function Hero() {
           animate={{ y: [0, -14, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
+          {/* Original Magic Food logo — top badge */}
+          <motion.div
+            className="relative z-20 -mb-6 sm:-mb-10"
+            initial={{ opacity: 0, y: -20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+          >
+            <motion.div
+              aria-hidden
+              className="absolute inset-0 rounded-full blur-2xl"
+              style={{ background: "oklch(0.92 0.18 95 / 0.6)" }}
+              animate={{ opacity: [0.4, 0.9, 0.4], scale: [0.9, 1.1, 0.9] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <img
+              src={logo}
+              alt="Magic Food logo"
+              width={544}
+              height={478}
+              className="relative w-32 sm:w-44 md:w-52 h-auto drop-shadow-[0_0_30px_oklch(0.92_0.18_95/0.8)]"
+            />
+          </motion.div>
+
           {/* Inner soft halo */}
           <motion.div
             aria-hidden
@@ -139,12 +162,13 @@ function Hero() {
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
 
+          {/* Magical burger composition */}
           <img
-            src={logo}
+            src={heroComposition}
             alt="Magic Food — tap to view menu"
             width={1024}
-            height={930}
-            className="relative w-[78%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
+            height={1024}
+            className="relative w-[72%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
             style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
           />
 
