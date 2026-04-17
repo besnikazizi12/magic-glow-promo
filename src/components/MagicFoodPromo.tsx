@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/magic-food-logo.png";
+import logo from "@/assets/magic-burger-hero.png";
 import burger from "@/assets/food-burger.jpg";
 import pizza from "@/assets/food-pizza.jpg";
 import fries from "@/assets/food-fries.jpg";
@@ -147,35 +147,35 @@ function Hero() {
             style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
           />
 
-          {/* Shining wordmark */}
-          <div className="relative -mt-2 flex flex-col items-center pointer-events-none">
+          {/* Shining wordmark — Magic (gold shimmer) + Food (fiery red) */}
+          <div className="relative -mt-2 flex items-baseline gap-3 sm:gap-4 pointer-events-none">
             <span
-              className="font-script text-3xl sm:text-5xl md:text-6xl leading-none -mb-2"
+              className="font-script text-4xl sm:text-6xl md:text-7xl leading-none"
               style={{
                 color: "transparent",
                 backgroundImage:
-                  "linear-gradient(90deg, #fff5a3, #ffd24a, #ff8a3d, #ff3d3d, #ffd24a, #fff5a3, #ffd24a, #ff8a3d)",
+                  "linear-gradient(90deg, #fff5a3, #ffe066, #ffd24a, #ffb84a, #ffe066, #fff5a3, #ffd24a)",
                 backgroundSize: "300% auto",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 animation: "shimmer 2.5s linear infinite",
                 filter:
-                  "drop-shadow(0 0 18px #ffb84a) drop-shadow(0 0 6px #fff5a3)",
+                  "drop-shadow(0 0 18px #ffd24a) drop-shadow(0 0 8px #fff5a3) drop-shadow(0 2px 4px rgba(0,0,0,0.4))",
               }}
             >
               Magic
             </span>
             <span
-              className="font-display text-5xl sm:text-7xl md:text-8xl tracking-[0.18em] uppercase"
+              className="font-display text-5xl sm:text-7xl md:text-8xl tracking-[0.12em] uppercase"
               style={{
                 color: "transparent",
                 backgroundImage:
-                  "linear-gradient(180deg, #ffffff 0%, #fff5a3 25%, #ffd24a 50%, #ff8a3d 75%, #ff3d3d 100%)",
+                  "linear-gradient(180deg, #ffb84a 0%, #ff6b3d 35%, #ff3d3d 70%, #c41e1e 100%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 filter:
-                  "drop-shadow(0 4px 24px #ff3d3d) drop-shadow(0 0 30px #ffd24a) drop-shadow(0 0 8px #fff5a3)",
-                WebkitTextStroke: "1px oklch(0.62 0.23 27 / 0.4)",
+                  "drop-shadow(0 4px 24px #ff3d3d) drop-shadow(0 0 30px #ff6b3d) drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
+                WebkitTextStroke: "1px rgba(255, 215, 100, 0.4)",
               }}
             >
               Food
