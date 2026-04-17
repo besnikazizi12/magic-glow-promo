@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/magic-food-logo.png";
+import logo from "@/assets/magic-food-logo.svg";
 import burger from "@/assets/food-burger.jpg";
 import pizza from "@/assets/food-pizza.jpg";
 import fries from "@/assets/food-fries.jpg";
