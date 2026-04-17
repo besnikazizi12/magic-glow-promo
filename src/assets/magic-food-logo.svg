@@ -1,0 +1,61 @@
+<svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Magic Food Logo</title>
+<desc>Magic Food restaurant logo featuring a cloche dome with a shooting star and magic wand</desc>
+<defs>
+  <radialGradient id="domeGrad" cx="50%" cy="60%" r="55%">
+    <stop offset="0%" stop-color="#e8142a"/>
+    <stop offset="100%" stop-color="#a50d1e"/>
+  </radialGradient>
+  <radialGradient id="starTrailGrad" cx="20%" cy="50%" r="80%">
+    <stop offset="0%" stop-color="#1a1a2e"/>
+    <stop offset="100%" stop-color="#0d0d1a"/>
+  </radialGradient>
+  <linearGradient id="wandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#5a5a5a"/>
+    <stop offset="100%" stop-color="#2a2a2a"/>
+  </linearGradient>
+  <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#ffe84d"/>
+    <stop offset="100%" stop-color="#d4a000"/>
+  </linearGradient>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<ellipse cx="340" cy="455" rx="195" ry="18" fill="#c0100e"/>
+<ellipse cx="340" cy="450" rx="195" ry="18" fill="#d41214"/>
+<rect x="155" y="445" width="370" height="14" rx="4" fill="#d41214"/>
+<ellipse cx="340" cy="459" rx="195" ry="12" fill="#b00e0c"/>
+<path d="M 155 450 Q 155 280 340 245 Q 525 280 525 450 Z" fill="url(#domeGrad)"/>
+<path d="M 200 420 Q 205 320 290 288 Q 340 270 320 300 Q 270 330 265 420 Z" fill="#f01520" opacity="0.4"/>
+<ellipse cx="340" cy="244" rx="22" ry="10" fill="#b00e0c"/>
+<ellipse cx="340" cy="238" rx="18" ry="14" fill="#c0100e"/>
+<ellipse cx="340" cy="232" rx="12" ry="9" fill="#d41214"/>
+<ellipse cx="310" cy="355" rx="155" ry="110" fill="url(#starTrailGrad)" opacity="0.92"/>
+<g fill="#f5d800" filter="url(#glow)">
+  <polygon points="235,320 240,310 245,320 256,320 248,328 251,339 240,332 229,339 232,328 224,320" opacity="0.95"/>
+  <polygon points="290,380 293,372 296,380 305,380 298,385 301,393 290,387 279,393 282,385 275,380" opacity="0.9"/>
+  <polygon points="260,295 263,288 266,295 274,295 268,300 271,308 260,302 249,308 252,300 246,295" opacity="0.85"/>
+  <polygon points="320,395 322,389 324,395 331,395 326,399 328,406 320,401 312,406 314,399 309,395" opacity="0.8"/>
+  <polygon points="250,355 252,349 254,355 261,355 256,359 258,365 250,361 242,365 244,359 239,355" opacity="0.75"/>
+  <circle cx="275" cy="330" r="4" opacity="0.7"/>
+  <circle cx="305" cy="305" r="3" opacity="0.65"/>
+  <circle cx="340" cy="375" r="3.5" opacity="0.7"/>
+  <circle cx="280" cy="370" r="2.5" opacity="0.6"/>
+  <circle cx="310" cy="340" r="3" opacity="0.65"/>
+  <circle cx="265" cy="310" r="2" opacity="0.55"/>
+  <circle cx="330" cy="350" r="2" opacity="0.6"/>
+  <circle cx="245" cy="340" r="2.5" opacity="0.5"/>
+</g>
+<path d="M 220 390 Q 280 290 400 280" fill="none" stroke="#f5d800" stroke-width="6" stroke-linecap="round" opacity="0.9" filter="url(#glow)"/>
+<path d="M 220 390 Q 280 290 400 280" fill="none" stroke="#ffe84d" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+<line x1="290" y1="420" x2="390" y2="280" stroke="url(#wandGrad)" stroke-width="11" stroke-linecap="round"/>
+<line x1="290" y1="420" x2="390" y2="280" stroke="#4a4a4a" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(400,268) rotate(-15)">
+  <polygon points="0,-28 7,-10 26,-10 12,2 17,20 0,9 -17,20 -12,2 -26,-10 -7,-10" fill="url(#starGrad)" filter="url(#glow)"/>
+  <polygon points="0,-22 5.5,-8 20,-8 9.5,1.5 13.5,16 0,7 -13.5,16 -9.5,1.5 -20,-8 -5.5,-8" fill="#ffe84d"/>
+</g>
+<text x="176" y="545" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700" font-style="italic" fill="#f5d800" letter-spacing="-1">Magic</text>
+<text x="342" y="545" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="400" font-style="italic" fill="#e8142a" letter-spacing="-1">food</text>
+</svg>
