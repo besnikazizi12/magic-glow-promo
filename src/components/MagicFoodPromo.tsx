@@ -314,7 +314,8 @@ function CategoryImage({ src, alt }: { src: string; alt: string }) {
 function MenuSection() {
   return (
     <section
-      className="relative py-14 sm:py-20 px-4 sm:px-8"
+      id="menu"
+      className="relative py-14 sm:py-20 px-4 sm:px-8 scroll-mt-0"
       style={{
         background:
           "linear-gradient(180deg, oklch(0.12 0.04 35) 0%, oklch(0.08 0.02 30) 100%)",
