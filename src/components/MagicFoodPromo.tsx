@@ -1,133 +1,201 @@
 import logo from "@/assets/magic-food-logo.png";
-import burger from "@/assets/food-burger.jpg";
-import pizza from "@/assets/food-pizza.jpg";
-import fries from "@/assets/food-fries.jpg";
-import hotdog from "@/assets/food-hotdog.jpg";
+import heroBurger from "@/assets/hero-burger.png";
 
-// Easy to edit: change names, prices, or images here
+// Easy to edit: change names, prices, descriptions here
 const MENU_ITEMS = [
-  { name: "Burger", price: "150 den", image: burger },
-  { name: "Pizza", price: "300 den", image: pizza },
-  { name: "Fries", price: "100 den", image: fries },
-  { name: "Hot Dog", price: "120 den", image: hotdog },
+  {
+    name: "Burger",
+    tag: "classic double",
+    desc: "Juicy beef patties, melted cheese, fresh lettuce & tomato in a sesame bun.",
+    price: "150 den",
+  },
+  {
+    name: "Pizza",
+    tag: "stone-baked",
+    desc: "Hand-stretched dough, rich tomato sauce, melted mozzarella & pepperoni.",
+    price: "300 den",
+  },
+  {
+    name: "Fries",
+    tag: "golden crispy",
+    desc: "Hand-cut potatoes fried to golden perfection, lightly salted.",
+    price: "100 den",
+  },
+  {
+    name: "Hot Dog",
+    tag: "smoky grilled",
+    desc: "Smoked sausage in a soft bun with mustard, ketchup and onions.",
+    price: "120 den",
+  },
 ];
 
 const PHONE_NUMBER = "+389 XX XXX XXX";
 
-export function MagicFoodPromo() {
+function MenuItem({
+  item,
+  align,
+}: {
+  item: (typeof MENU_ITEMS)[number];
+  align: "left" | "right";
+}) {
   return (
-    <div className="min-h-screen w-full bg-background flex items-center justify-center p-4 sm:p-6 md:p-8 font-body overflow-hidden relative">
-      {/* Ambient background glows */}
+    <div
+      className={`flex flex-col gap-1.5 ${
+        align === "right" ? "lg:text-right lg:items-end" : "items-start"
+      }`}
+    >
+      <div className="flex items-baseline gap-2 flex-wrap">
+        <h3
+          className="font-display text-2xl sm:text-3xl tracking-wide leading-none"
+          style={{ color: "var(--brand-yellow)" }}
+        >
+          {item.name}
+        </h3>
+        <span className="text-xs sm:text-sm italic text-white/70">
+          ({item.tag})
+        </span>
+      </div>
+      <p
+        className={`text-xs sm:text-[13px] leading-snug text-white/75 max-w-[260px] ${
+          align === "right" ? "lg:ml-auto" : ""
+        }`}
+      >
+        {item.desc}
+      </p>
+      <p
+        className="font-display text-2xl tracking-wider mt-0.5"
+        style={{ color: "var(--brand-orange)" }}
+      >
+        {item.price}
+      </p>
+    </div>
+  );
+}
+
+export function MagicFoodPromo() {
+  const left = MENU_ITEMS.slice(0, 2);
+  const right = MENU_ITEMS.slice(2, 4);
+
+  return (
+    <main
+      className="min-h-screen w-full flex items-center justify-center p-3 sm:p-6 md:p-10 font-body relative overflow-hidden"
+      style={{ background: "var(--gradient-warm)" }}
+    >
+      {/* Ambient glows */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full blur-[120px] opacity-30"
-        style={{ background: "var(--brand-orange)" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full blur-[120px] opacity-20"
-        style={{ background: "var(--brand-red)" }}
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 50%, oklch(0.7 0.2 50 / 0.4), transparent 60%)",
+        }}
       />
 
-      {/* Square card — 1080x1080 friendly, scales for all sizes */}
+      {/* Landscape menu card */}
       <article
-        className="relative w-full max-w-[1080px] aspect-square bg-surface rounded-3xl overflow-hidden flex flex-col items-center justify-between p-6 sm:p-10 md:p-14"
-        style={{ boxShadow: "var(--shadow-card)" }}
+        className="relative w-full max-w-[1200px] rounded-[2rem] overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(160deg, oklch(0.32 0.12 45), oklch(0.18 0.06 40))",
+          boxShadow: "var(--shadow-card)",
+        }}
       >
-        {/* Inner radial glow */}
+        {/* Subtle scribbled food pattern overlay */}
         <div
           aria-hidden
-          className="absolute inset-0 opacity-60 pointer-events-none"
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{
-            background:
-              "radial-gradient(circle at 50% 0%, oklch(0.75 0.19 55 / 0.18), transparent 60%)",
+            backgroundImage:
+              "radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 70% 60%, white 1px, transparent 1px)",
+            backgroundSize: "60px 60px, 80px 80px",
           }}
         />
 
-        {/* Logo */}
-        <header className="relative z-10 flex flex-col items-center gap-2">
-          <img
-            src={logo}
-            alt="Magic Food logo"
-            className="w-40 sm:w-52 md:w-64 h-auto drop-shadow-[0_0_30px_oklch(0.75_0.19_55/0.5)]"
-            width={512}
-            height={460}
-          />
-          <p
-            className="text-xs sm:text-sm tracking-[0.4em] uppercase"
-            style={{ color: "var(--brand-yellow)" }}
-          >
-            Taste the Magic
-          </p>
-        </header>
-
-        {/* Menu grid */}
-        <section className="relative z-10 grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 w-full max-w-2xl my-6">
-          {MENU_ITEMS.map((item) => (
+        <div className="relative z-10 px-5 sm:px-10 md:px-14 py-8 sm:py-10 md:py-14">
+          {/* Ornate header frame */}
+          <header className="relative flex flex-col items-center mb-6 sm:mb-10">
             <div
-              key={item.name}
-              className="group relative flex flex-col items-center gap-3 rounded-2xl bg-surface-elevated/60 backdrop-blur-sm p-4 sm:p-5 transition-[transform,box-shadow] duration-500 hover:-translate-y-1"
+              className="relative px-6 sm:px-12 py-4 sm:py-5"
               style={{
-                boxShadow:
-                  "0 10px 30px -10px oklch(0 0 0 / 0.5), inset 0 1px 0 oklch(0.88 0.18 95 / 0.08)",
+                clipPath:
+                  "polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%)",
+                background:
+                  "linear-gradient(180deg, oklch(0.22 0.06 40), oklch(0.14 0.04 40))",
+                boxShadow: "inset 0 0 0 2px oklch(0.92 0.18 95 / 0.6)",
               }}
             >
-              <div
-                className="relative h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 rounded-full overflow-hidden ring-2"
-                style={{
-                  boxShadow: "var(--glow-warm)",
-                  // @ts-expect-error css var
-                  "--tw-ring-color": "oklch(0.75 0.19 55 / 0.4)",
-                }}
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                  width={300}
-                  height={300}
-                />
-              </div>
-              <div className="text-center">
-                <h3
-                  className="font-display text-xl sm:text-2xl md:text-3xl tracking-wide leading-none"
-                  style={{ color: "var(--brand-yellow)" }}
-                >
-                  {item.name}
-                </h3>
-                <p
-                  className="mt-1 text-base sm:text-lg md:text-xl font-semibold"
-                  style={{ color: "var(--brand-orange)" }}
-                >
-                  {item.price}
-                </p>
-              </div>
+              <img
+                src={logo}
+                alt="Magic Food"
+                width={400}
+                height={360}
+                className="h-20 sm:h-24 md:h-28 w-auto drop-shadow-[0_0_25px_oklch(0.75_0.19_55/0.7)]"
+              />
             </div>
-          ))}
-        </section>
+            <p
+              className="mt-3 text-[10px] sm:text-xs tracking-[0.5em] uppercase font-semibold"
+              style={{ color: "var(--brand-yellow)" }}
+            >
+              Fast Food Restaurant
+            </p>
+          </header>
 
-        {/* CTA */}
-        <footer className="relative z-10 flex flex-col items-center gap-3 w-full">
-          <a
-            href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
-            className="group relative inline-flex items-center justify-center gap-3 rounded-full px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl md:text-2xl font-bold text-white transition-transform duration-300 hover:scale-105 active:scale-95"
-            style={{
-              background: "var(--gradient-cta)",
-              boxShadow: "var(--shadow-cta)",
-            }}
-          >
-            <span className="text-2xl sm:text-3xl">📞</span>
-            <span className="tracking-wide">Call Now</span>
-          </a>
-          <p
-            className="text-sm sm:text-base md:text-lg font-medium tracking-wider"
-            style={{ color: "var(--brand-yellow)" }}
-          >
-            {PHONE_NUMBER}
-          </p>
-        </footer>
+          {/* Menu grid: items left | hero | items right */}
+          <section className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 sm:gap-8 lg:gap-6 items-center">
+            {/* Left items */}
+            <div className="flex flex-col gap-6 sm:gap-8 order-2 lg:order-1">
+              {left.map((item) => (
+                <MenuItem key={item.name} item={item} align="left" />
+              ))}
+            </div>
+
+            {/* Hero burger */}
+            <div className="relative order-1 lg:order-2 flex items-center justify-center">
+              <div
+                aria-hidden
+                className="absolute inset-0 rounded-full blur-3xl opacity-70"
+                style={{ background: "var(--brand-orange)" }}
+              />
+              <img
+                src={heroBurger}
+                alt="Signature Magic Food burger with flying fries"
+                width={1024}
+                height={1024}
+                className="relative w-56 sm:w-72 md:w-80 lg:w-[22rem] h-auto"
+                style={{ filter: "drop-shadow(var(--glow-hero))" }}
+              />
+            </div>
+
+            {/* Right items */}
+            <div className="flex flex-col gap-6 sm:gap-8 order-3">
+              {right.map((item) => (
+                <MenuItem key={item.name} item={item} align="right" />
+              ))}
+            </div>
+          </section>
+
+          {/* CTA */}
+          <footer className="mt-8 sm:mt-12 flex flex-col items-center gap-3">
+            <a
+              href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
+              className="group inline-flex items-center justify-center gap-3 rounded-full px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white transition-transform duration-300 hover:scale-105 active:scale-95"
+              style={{
+                background: "var(--gradient-cta)",
+                boxShadow: "var(--shadow-cta)",
+              }}
+            >
+              <span className="text-2xl">📞</span>
+              <span className="tracking-wider uppercase">Call Now</span>
+            </a>
+            <p
+              className="text-sm sm:text-base font-semibold tracking-[0.2em]"
+              style={{ color: "var(--brand-yellow)" }}
+            >
+              {PHONE_NUMBER}
+            </p>
+          </footer>
+        </div>
       </article>
-    </div>
+    </main>
   );
 }
