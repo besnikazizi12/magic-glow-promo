@@ -49,8 +49,14 @@ const PHONE_NUMBER = "+389 XX XXX XXX";
 
 /* ---------------- HERO ---------------- */
 function Hero() {
+  const scrollToMenu = () => {
+    document
+      .getElementById("menu")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-10">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-6">
       {/* Animated gradient backdrop */}
       <div
         aria-hidden
@@ -60,7 +66,7 @@ function Hero() {
       {/* Rotating glow ring */}
       <motion.div
         aria-hidden
-        className="absolute h-[800px] w-[800px] rounded-full opacity-50 blur-3xl"
+        className="absolute h-[900px] w-[900px] rounded-full opacity-50 blur-3xl"
         style={{
           background:
             "conic-gradient(from 0deg, oklch(0.62 0.23 27), oklch(0.92 0.18 95), oklch(0.75 0.19 55), oklch(0.62 0.23 27))",
@@ -70,13 +76,13 @@ function Hero() {
       />
 
       {/* Floating sparkles */}
-      {[...Array(15)].map((_, i) => (
+      {[...Array(20)].map((_, i) => (
         <motion.span
           key={i}
           className="absolute h-1.5 w-1.5 rounded-full"
           style={{
             background: "var(--brand-yellow)",
-            top: `${10 + Math.random() * 80}%`,
+            top: `${5 + Math.random() * 90}%`,
             left: `${5 + Math.random() * 90}%`,
             boxShadow: "0 0 12px oklch(0.92 0.18 95)",
           }}
@@ -93,151 +99,127 @@ function Hero() {
         />
       ))}
 
-      {/* BIG Logo with glowing frame */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center"
-        initial={{ opacity: 0, scale: 0.6, y: 40 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      {/* FULLSCREEN clickable logo */}
+      <motion.button
+        type="button"
+        onClick={scrollToMenu}
+        aria-label="View our menu"
+        className="group relative z-10 flex items-center justify-center w-[min(92vw,92vh)] h-[min(92vw,92vh)] cursor-pointer outline-none bg-transparent border-0"
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
       >
         {/* Outer rotating glow */}
         <motion.div
           aria-hidden
-          className="absolute -inset-8 rounded-[2.5rem] blur-2xl opacity-80"
+          className="absolute inset-0 rounded-full blur-3xl opacity-90"
           style={{
             background:
-              "conic-gradient(from 0deg, oklch(0.62 0.23 27 / 0.6), oklch(0.92 0.18 95 / 0.6), oklch(0.75 0.19 55 / 0.6), oklch(0.62 0.23 27 / 0.6))",
+              "conic-gradient(from 0deg, oklch(0.62 0.23 27 / 0.7), oklch(0.92 0.18 95 / 0.7), oklch(0.75 0.19 55 / 0.7), oklch(0.62 0.23 27 / 0.7))",
           }}
           animate={{ rotate: 360 }}
-          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Logo frame (square) */}
+        {/* Logo + wordmark stack */}
         <motion.div
-          className="relative rounded-[2rem] p-6 sm:p-8 md:p-10"
-          style={{
-            background:
-              "linear-gradient(160deg, oklch(0.18 0.05 40), oklch(0.08 0.02 30))",
-            boxShadow:
-              "0 30px 80px -20px oklch(0 0 0 / 0.8), inset 0 0 0 2px oklch(0.92 0.18 95 / 0.5), inset 0 0 60px oklch(0.62 0.23 27 / 0.3)",
-          }}
-          animate={{ y: [0, -10, 0] }}
+          className="relative flex flex-col items-center justify-center w-full h-full"
+          animate={{ y: [0, -14, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          {/* Inner pulse halo */}
+          {/* Inner soft halo */}
           <motion.div
             aria-hidden
-            className="absolute inset-4 rounded-[1.5rem] blur-xl"
-            style={{ background: "oklch(0.75 0.19 55 / 0.4)" }}
-            animate={{ opacity: [0.4, 0.8, 0.4], scale: [0.95, 1.05, 0.95] }}
+            className="absolute inset-[15%] rounded-full blur-2xl"
+            style={{ background: "oklch(0.75 0.19 55 / 0.55)" }}
+            animate={{ opacity: [0.4, 0.85, 0.4], scale: [0.9, 1.1, 0.9] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
+
           <img
             src={logo}
-            alt="Magic Food"
-            width={500}
-            height={460}
-            className="relative w-64 sm:w-80 md:w-[26rem] h-auto"
+            alt="Magic Food — tap to view menu"
+            width={1024}
+            height={930}
+            className="relative w-[78%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
             style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
           />
-          {/* Corner sparkles */}
-          {[
-            { top: "0", left: "0" },
-            { top: "0", right: "0" },
-            { bottom: "0", left: "0" },
-            { bottom: "0", right: "0" },
-          ].map((pos, i) => (
-            <motion.span
-              key={i}
-              className="absolute h-3 w-3 rounded-full"
+
+          {/* Shining wordmark */}
+          <div className="relative -mt-2 flex flex-col items-center pointer-events-none">
+            <span
+              className="font-script text-3xl sm:text-5xl md:text-6xl leading-none -mb-2"
               style={{
-                ...pos,
-                background: "var(--brand-yellow)",
-                boxShadow: "0 0 20px oklch(0.92 0.18 95)",
-                transform: "translate(-50%, -50%)",
+                color: "transparent",
+                backgroundImage:
+                  "linear-gradient(90deg, #fff5a3, #ffd24a, #ff8a3d, #ff3d3d, #ffd24a, #fff5a3, #ffd24a, #ff8a3d)",
+                backgroundSize: "300% auto",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                animation: "shimmer 2.5s linear infinite",
+                filter:
+                  "drop-shadow(0 0 18px #ffb84a) drop-shadow(0 0 6px #fff5a3)",
               }}
-              animate={{ scale: [0, 1.3, 0], opacity: [0, 1, 0] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: i * 0.5,
+            >
+              Magic
+            </span>
+            <span
+              className="font-display text-5xl sm:text-7xl md:text-8xl tracking-[0.18em] uppercase"
+              style={{
+                color: "transparent",
+                backgroundImage:
+                  "linear-gradient(180deg, #ffffff 0%, #fff5a3 25%, #ffd24a 50%, #ff8a3d 75%, #ff3d3d 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                filter:
+                  "drop-shadow(0 4px 24px #ff3d3d) drop-shadow(0 0 30px #ffd24a) drop-shadow(0 0 8px #fff5a3)",
+                WebkitTextStroke: "1px oklch(0.62 0.23 27 / 0.4)",
               }}
-            />
-          ))}
+            >
+              Food
+            </span>
+          </div>
         </motion.div>
-      </motion.div>
 
-      {/* Shining wordmark */}
-      <motion.div
-        className="relative z-10 mt-8 flex flex-col items-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-      >
-        <span
-          className="font-script text-3xl sm:text-4xl md:text-5xl leading-none -mb-1"
-          style={{
-            color: "transparent",
-            backgroundImage:
-              "linear-gradient(90deg, oklch(0.92 0.18 95), oklch(0.75 0.19 55), oklch(0.95 0.16 95), oklch(0.62 0.23 27), oklch(0.92 0.18 95))",
-            backgroundSize: "200% auto",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            animation: "shimmer 3s linear infinite",
-            filter: "drop-shadow(0 0 20px oklch(0.75 0.19 55 / 0.6))",
-          }}
-        >
-          Magic
-        </span>
-        <span
-          className="font-display text-5xl sm:text-7xl md:text-8xl tracking-[0.15em] uppercase"
-          style={{
-            color: "transparent",
-            backgroundImage:
-              "linear-gradient(180deg, oklch(0.98 0.05 95) 0%, oklch(0.92 0.18 95) 40%, oklch(0.75 0.19 55) 70%, oklch(0.62 0.23 27) 100%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            filter:
-              "drop-shadow(0 4px 20px oklch(0.62 0.23 27 / 0.6)) drop-shadow(0 0 30px oklch(0.92 0.18 95 / 0.4))",
-            WebkitTextStroke: "1px oklch(0.62 0.23 27 / 0.3)",
-          }}
-        >
-          Food
-        </span>
-      </motion.div>
-
-      <motion.p
-        className="relative z-10 mt-5 text-[10px] sm:text-xs tracking-[0.5em] uppercase font-semibold"
-        style={{ color: "var(--brand-yellow)" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-      >
-        ✦ Taste the Magic ✦
-      </motion.p>
-
-      {/* Scroll cue */}
-      <motion.div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-      >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-white/70">
-          Menu
-        </span>
-        <motion.div
-          className="h-8 w-5 rounded-full border-2 flex items-start justify-center pt-1.5"
-          style={{ borderColor: "oklch(0.92 0.18 95 / 0.6)" }}
-        >
+        {/* Corner sparkles */}
+        {[
+          { top: "8%", left: "12%" },
+          { top: "8%", right: "12%" },
+          { bottom: "22%", left: "8%" },
+          { bottom: "22%", right: "8%" },
+          { top: "45%", left: "4%" },
+          { top: "45%", right: "4%" },
+        ].map((pos, i) => (
           <motion.span
-            className="block h-1 w-1 rounded-full"
-            style={{ background: "var(--brand-yellow)" }}
-            animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-            transition={{ duration: 1.8, repeat: Infinity }}
+            key={i}
+            aria-hidden
+            className="absolute h-3 w-3 rounded-full"
+            style={{
+              ...pos,
+              background: "var(--brand-yellow)",
+              boxShadow: "0 0 24px oklch(0.92 0.18 95), 0 0 8px white",
+            }}
+            animate={{ scale: [0, 1.4, 0], opacity: [0, 1, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 0.35,
+            }}
           />
-        </motion.div>
-      </motion.div>
+        ))}
+      </motion.button>
+
+      {/* Tap hint */}
+      <motion.p
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-semibold flex items-center gap-2"
+        style={{ color: "var(--brand-yellow)" }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        ✦ Tap logo for menu ✦
+      </motion.p>
     </section>
   );
 }
