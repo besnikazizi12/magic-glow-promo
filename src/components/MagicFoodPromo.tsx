@@ -1,201 +1,435 @@
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import logo from "@/assets/magic-food-logo.png";
-import heroBurger from "@/assets/hero-burger.png";
+import burger from "@/assets/food-burger.jpg";
+import pizza from "@/assets/food-pizza.jpg";
+import fries from "@/assets/food-fries.jpg";
+import hotdog from "@/assets/food-hotdog.jpg";
 
-// Easy to edit: change names, prices, descriptions here
+// Easy to edit: change names, prices, descriptions, images here
 const MENU_ITEMS = [
   {
     name: "Burger",
-    tag: "classic double",
-    desc: "Juicy beef patties, melted cheese, fresh lettuce & tomato in a sesame bun.",
-    price: "150 den",
+    tag: "Classic Double",
+    desc: "Juicy beef, melted cheese & fresh greens.",
+    price: "150",
+    image: burger,
   },
   {
     name: "Pizza",
-    tag: "stone-baked",
-    desc: "Hand-stretched dough, rich tomato sauce, melted mozzarella & pepperoni.",
-    price: "300 den",
+    tag: "Stone-Baked",
+    desc: "Mozzarella, pepperoni & rich tomato.",
+    price: "300",
+    image: pizza,
   },
   {
     name: "Fries",
-    tag: "golden crispy",
-    desc: "Hand-cut potatoes fried to golden perfection, lightly salted.",
-    price: "100 den",
+    tag: "Golden Crispy",
+    desc: "Hand-cut, lightly salted to perfection.",
+    price: "100",
+    image: fries,
   },
   {
     name: "Hot Dog",
-    tag: "smoky grilled",
-    desc: "Smoked sausage in a soft bun with mustard, ketchup and onions.",
-    price: "120 den",
+    tag: "Smoky Grilled",
+    desc: "Smoked sausage, mustard & onions.",
+    price: "120",
+    image: hotdog,
   },
 ];
 
 const PHONE_NUMBER = "+389 XX XXX XXX";
 
-function MenuItem({
-  item,
-  align,
-}: {
-  item: (typeof MENU_ITEMS)[number];
-  align: "left" | "right";
-}) {
+/* ---------------- HERO ---------------- */
+function Hero() {
   return (
-    <div
-      className={`flex flex-col gap-1.5 ${
-        align === "right" ? "lg:text-right lg:items-end" : "items-start"
-      }`}
-    >
-      <div className="flex items-baseline gap-2 flex-wrap">
-        <h3
-          className="font-display text-2xl sm:text-3xl tracking-wide leading-none"
-          style={{ color: "var(--brand-yellow)" }}
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-16">
+      {/* Animated gradient backdrop */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: "var(--gradient-warm)" }}
+      />
+      {/* Rotating glow ring */}
+      <motion.div
+        aria-hidden
+        className="absolute h-[700px] w-[700px] rounded-full opacity-50 blur-3xl"
+        style={{
+          background:
+            "conic-gradient(from 0deg, oklch(0.62 0.23 27), oklch(0.92 0.18 95), oklch(0.75 0.19 55), oklch(0.62 0.23 27))",
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Floating sparkles */}
+      {[...Array(12)].map((_, i) => (
+        <motion.span
+          key={i}
+          className="absolute h-1.5 w-1.5 rounded-full"
+          style={{
+            background: "var(--brand-yellow)",
+            top: `${15 + Math.random() * 70}%`,
+            left: `${10 + Math.random() * 80}%`,
+            boxShadow: "0 0 12px oklch(0.92 0.18 95)",
+          }}
+          animate={{
+            opacity: [0, 1, 0],
+            scale: [0, 1.2, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+          }}
+        />
+      ))}
+
+      {/* Logo with glow + float */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center"
+        initial={{ opacity: 0, scale: 0.7, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {/* Halo behind logo */}
+        <motion.div
+          aria-hidden
+          className="absolute -inset-10 rounded-full blur-2xl"
+          style={{ background: "oklch(0.75 0.19 55 / 0.5)" }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <motion.img
+          src={logo}
+          alt="Magic Food"
+          width={500}
+          height={460}
+          className="relative w-56 sm:w-72 md:w-80 h-auto"
+          style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </motion.div>
+
+      {/* Shining "Magic Food" wordmark */}
+      <motion.div
+        className="relative z-10 mt-6 flex flex-col items-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.4 }}
+      >
+        <span
+          className="font-script text-4xl sm:text-5xl md:text-6xl leading-none -mb-2"
+          style={{
+            color: "transparent",
+            backgroundImage:
+              "linear-gradient(90deg, oklch(0.92 0.18 95), oklch(0.75 0.19 55), oklch(0.95 0.16 95), oklch(0.62 0.23 27), oklch(0.92 0.18 95))",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            animation: "shimmer 3s linear infinite",
+            filter: "drop-shadow(0 0 20px oklch(0.75 0.19 55 / 0.6))",
+          }}
         >
-          {item.name}
-        </h3>
-        <span className="text-xs sm:text-sm italic text-white/70">
-          ({item.tag})
+          Magic
         </span>
-      </div>
-      <p
-        className={`text-xs sm:text-[13px] leading-snug text-white/75 max-w-[260px] ${
-          align === "right" ? "lg:ml-auto" : ""
-        }`}
+        <span
+          className="font-display text-6xl sm:text-7xl md:text-8xl tracking-[0.15em] uppercase"
+          style={{
+            color: "transparent",
+            backgroundImage:
+              "linear-gradient(180deg, oklch(0.98 0.05 95) 0%, oklch(0.92 0.18 95) 40%, oklch(0.75 0.19 55) 70%, oklch(0.62 0.23 27) 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            filter:
+              "drop-shadow(0 4px 20px oklch(0.62 0.23 27 / 0.6)) drop-shadow(0 0 30px oklch(0.92 0.18 95 / 0.4))",
+            WebkitTextStroke: "1px oklch(0.62 0.23 27 / 0.3)",
+          }}
+        >
+          Food
+        </span>
+        {/* Shining sweep overlay */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(105deg, transparent 40%, oklch(1 0 0 / 0.4) 50%, transparent 60%)",
+            mixBlendMode: "overlay",
+          }}
+          animate={{ x: ["-100%", "100%"] }}
+          transition={{ duration: 3, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }}
+        />
+      </motion.div>
+
+      {/* Tagline */}
+      <motion.p
+        className="relative z-10 mt-6 text-xs sm:text-sm tracking-[0.5em] uppercase font-semibold"
+        style={{ color: "var(--brand-yellow)" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
       >
-        {item.desc}
-      </p>
-      <p
-        className="font-display text-2xl tracking-wider mt-0.5"
-        style={{ color: "var(--brand-orange)" }}
+        ✦ Taste the Magic ✦
+      </motion.p>
+
+      {/* Scroll cue */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
       >
-        {item.price}
-      </p>
-    </div>
+        <span className="text-xs uppercase tracking-[0.3em] text-white/70">
+          Scroll
+        </span>
+        <motion.div
+          className="h-10 w-6 rounded-full border-2 flex items-start justify-center pt-2"
+          style={{ borderColor: "oklch(0.92 0.18 95 / 0.6)" }}
+        >
+          <motion.span
+            className="block h-1.5 w-1.5 rounded-full"
+            style={{ background: "var(--brand-yellow)" }}
+            animate={{ y: [0, 14, 0], opacity: [1, 0, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity }}
+          />
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
 
-export function MagicFoodPromo() {
-  const left = MENU_ITEMS.slice(0, 2);
-  const right = MENU_ITEMS.slice(2, 4);
-
+/* ---------------- MENU ITEM CARD ---------------- */
+function MenuCard({
+  item,
+  index,
+}: {
+  item: (typeof MENU_ITEMS)[number];
+  index: number;
+}) {
   return (
-    <main
-      className="min-h-screen w-full flex items-center justify-center p-3 sm:p-6 md:p-10 font-body relative overflow-hidden"
-      style={{ background: "var(--gradient-warm)" }}
+    <motion.article
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -8 }}
+      className="group relative rounded-3xl overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(160deg, oklch(0.22 0.06 40), oklch(0.12 0.04 40))",
+        boxShadow: "var(--shadow-card)",
+      }}
     >
-      {/* Ambient glows */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, oklch(0.7 0.2 50 / 0.4), transparent 60%)",
-        }}
-      />
-
-      {/* Landscape menu card */}
-      <article
-        className="relative w-full max-w-[1200px] rounded-[2rem] overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(160deg, oklch(0.32 0.12 45), oklch(0.18 0.06 40))",
-          boxShadow: "var(--shadow-card)",
-        }}
-      >
-        {/* Subtle scribbled food pattern overlay */}
+      {/* Image */}
+      <div className="relative aspect-square overflow-hidden">
+        <motion.img
+          src={item.image}
+          alt={item.name}
+          loading="lazy"
+          width={600}
+          height={600}
+          className="h-full w-full object-cover"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.6 }}
+        />
+        {/* Glow ring on hover */}
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 70% 60%, white 1px, transparent 1px)",
-            backgroundSize: "60px 60px, 80px 80px",
+            background:
+              "radial-gradient(circle at center, transparent 50%, oklch(0.62 0.23 27 / 0.4))",
           }}
         />
-
-        <div className="relative z-10 px-5 sm:px-10 md:px-14 py-8 sm:py-10 md:py-14">
-          {/* Ornate header frame */}
-          <header className="relative flex flex-col items-center mb-6 sm:mb-10">
-            <div
-              className="relative px-6 sm:px-12 py-4 sm:py-5"
-              style={{
-                clipPath:
-                  "polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%)",
-                background:
-                  "linear-gradient(180deg, oklch(0.22 0.06 40), oklch(0.14 0.04 40))",
-                boxShadow: "inset 0 0 0 2px oklch(0.92 0.18 95 / 0.6)",
-              }}
-            >
-              <img
-                src={logo}
-                alt="Magic Food"
-                width={400}
-                height={360}
-                className="h-20 sm:h-24 md:h-28 w-auto drop-shadow-[0_0_25px_oklch(0.75_0.19_55/0.7)]"
-              />
-            </div>
-            <p
-              className="mt-3 text-[10px] sm:text-xs tracking-[0.5em] uppercase font-semibold"
-              style={{ color: "var(--brand-yellow)" }}
-            >
-              Fast Food Restaurant
-            </p>
-          </header>
-
-          {/* Menu grid: items left | hero | items right */}
-          <section className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 sm:gap-8 lg:gap-6 items-center">
-            {/* Left items */}
-            <div className="flex flex-col gap-6 sm:gap-8 order-2 lg:order-1">
-              {left.map((item) => (
-                <MenuItem key={item.name} item={item} align="left" />
-              ))}
-            </div>
-
-            {/* Hero burger */}
-            <div className="relative order-1 lg:order-2 flex items-center justify-center">
-              <div
-                aria-hidden
-                className="absolute inset-0 rounded-full blur-3xl opacity-70"
-                style={{ background: "var(--brand-orange)" }}
-              />
-              <img
-                src={heroBurger}
-                alt="Signature Magic Food burger with flying fries"
-                width={1024}
-                height={1024}
-                className="relative w-56 sm:w-72 md:w-80 lg:w-[22rem] h-auto"
-                style={{ filter: "drop-shadow(var(--glow-hero))" }}
-              />
-            </div>
-
-            {/* Right items */}
-            <div className="flex flex-col gap-6 sm:gap-8 order-3">
-              {right.map((item) => (
-                <MenuItem key={item.name} item={item} align="right" />
-              ))}
-            </div>
-          </section>
-
-          {/* CTA */}
-          <footer className="mt-8 sm:mt-12 flex flex-col items-center gap-3">
-            <a
-              href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
-              className="group inline-flex items-center justify-center gap-3 rounded-full px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white transition-transform duration-300 hover:scale-105 active:scale-95"
-              style={{
-                background: "var(--gradient-cta)",
-                boxShadow: "var(--shadow-cta)",
-              }}
-            >
-              <span className="text-2xl">📞</span>
-              <span className="tracking-wider uppercase">Call Now</span>
-            </a>
-            <p
-              className="text-sm sm:text-base font-semibold tracking-[0.2em]"
-              style={{ color: "var(--brand-yellow)" }}
-            >
-              {PHONE_NUMBER}
-            </p>
-          </footer>
+        {/* Price badge */}
+        <div
+          className="absolute top-4 right-4 rounded-full px-4 py-2 font-display text-xl tracking-wider"
+          style={{
+            background: "var(--gradient-cta)",
+            color: "white",
+            boxShadow: "0 8px 20px -5px oklch(0.62 0.23 27 / 0.7)",
+          }}
+        >
+          {item.price} <span className="text-xs opacity-80">den</span>
         </div>
-      </article>
+      </div>
+
+      {/* Text */}
+      <div className="p-5 sm:p-6">
+        <p
+          className="font-script text-sm"
+          style={{ color: "var(--brand-orange)" }}
+        >
+          {item.tag}
+        </p>
+        <h3
+          className="font-display text-3xl sm:text-4xl tracking-wider uppercase leading-none mt-1"
+          style={{
+            color: "transparent",
+            backgroundImage:
+              "linear-gradient(180deg, oklch(0.98 0.05 95), oklch(0.85 0.18 85))",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+          }}
+        >
+          {item.name}
+        </h3>
+        <p className="mt-2 text-sm text-white/70 leading-snug">{item.desc}</p>
+      </div>
+    </motion.article>
+  );
+}
+
+/* ---------------- MENU SECTION ---------------- */
+function MenuSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const titleY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
+  return (
+    <section
+      ref={ref}
+      className="relative py-20 sm:py-28 px-4 sm:px-8 overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, oklch(0.15 0.05 40) 0%, oklch(0.1 0.03 30) 100%)",
+      }}
+    >
+      {/* Section heading */}
+      <motion.div
+        className="max-w-6xl mx-auto text-center mb-12 sm:mb-16"
+        style={{ y: titleY }}
+      >
+        <motion.p
+          className="font-script text-2xl sm:text-3xl mb-2"
+          style={{ color: "var(--brand-orange)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Our Delicious
+        </motion.p>
+        <motion.h2
+          className="font-display text-5xl sm:text-7xl md:text-8xl tracking-[0.15em] uppercase leading-none"
+          style={{
+            color: "transparent",
+            backgroundImage:
+              "linear-gradient(180deg, oklch(0.98 0.05 95), oklch(0.92 0.18 95) 40%, oklch(0.75 0.19 55) 75%, oklch(0.62 0.23 27))",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            filter: "drop-shadow(0 4px 20px oklch(0.62 0.23 27 / 0.5))",
+          }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          Menu
+        </motion.h2>
+        <motion.div
+          className="mx-auto mt-4 h-[2px] w-24"
+          style={{ background: "var(--gradient-gold)" }}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        />
+      </motion.div>
+
+      {/* Cards grid */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {MENU_ITEMS.map((item, i) => (
+          <MenuCard key={item.name} item={item} index={i} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- CTA SECTION ---------------- */
+function CTASection() {
+  return (
+    <section
+      className="relative py-20 px-4 overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(ellipse at center, oklch(0.45 0.18 35) 0%, oklch(0.15 0.05 30) 70%)",
+      }}
+    >
+      <motion.div
+        className="max-w-2xl mx-auto text-center flex flex-col items-center gap-6"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <p
+          className="font-script text-3xl sm:text-4xl"
+          style={{ color: "var(--brand-yellow)" }}
+        >
+          Hungry?
+        </p>
+        <h2
+          className="font-display text-4xl sm:text-6xl tracking-[0.15em] uppercase text-white leading-tight"
+        >
+          Order Now &<br />
+          Taste the Magic
+        </h2>
+
+        <motion.a
+          href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
+          className="group relative inline-flex items-center justify-center gap-3 rounded-full px-10 sm:px-14 py-5 sm:py-6 text-xl sm:text-2xl font-bold text-white"
+          style={{
+            background: "var(--gradient-cta)",
+            boxShadow: "var(--shadow-cta)",
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
+          animate={{
+            boxShadow: [
+              "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
+              "0 25px 70px -10px oklch(0.62 0.23 27 / 0.9)",
+              "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
+            ],
+          }}
+          transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
+        >
+          <span className="text-2xl">📞</span>
+          <span className="tracking-wider uppercase">Call Now</span>
+        </motion.a>
+
+        <p
+          className="text-base sm:text-lg font-bold tracking-[0.3em]"
+          style={{ color: "var(--brand-yellow)" }}
+        >
+          {PHONE_NUMBER}
+        </p>
+
+        <div className="flex items-center gap-6 mt-4 text-xs uppercase tracking-[0.25em] text-white/70">
+          <span>🚀 Free Delivery</span>
+          <span>•</span>
+          <span>⏰ 24/7 Open</span>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+/* ---------------- ROOT ---------------- */
+export function MagicFoodPromo() {
+  return (
+    <main className="font-body bg-background text-foreground">
+      <Hero />
+      <MenuSection />
+      <CTASection />
     </main>
   );
 }
