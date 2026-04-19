@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Phone, MapPin, Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 import logoPng from "@/assets/magic-food-logo.png";
-import logoSvg from "@/assets/magic-food-logo.svg";
 import burger from "@/assets/food-burger.jpg";
 import tost from "@/assets/food-tost.jpg";
 import salad from "@/assets/food-salad.jpg";
@@ -238,8 +237,8 @@ function Hero() {
           />
 
           <motion.img
-            src={logoSvg}
-            alt="Magic Food — tap to view menu"
+            src={logoPng}
+            alt="Magic Food — kliko për menu"
             width={544}
             height={478}
             className="relative w-[78%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
@@ -257,7 +256,7 @@ function Hero() {
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        ✦ Tap logo for menu ✦
+        ✦ Kliko logon për menu ✦
       </motion.p>
     </section>
   );
