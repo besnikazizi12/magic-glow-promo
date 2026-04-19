@@ -5,8 +5,8 @@ import logoPng from "@/assets/magic-food-logo.png";
 import logoSvg from "@/assets/magic-food-logo.svg";
 import burger from "@/assets/food-burger.jpg";
 import pizza from "@/assets/food-pizza.jpg";
-import fries from "@/assets/food-fries.jpg";
-import hotdog from "@/assets/food-hotdog.jpg";
+import salad from "@/assets/food-salad.jpg";
+import drinks from "@/assets/food-drinks.jpg";
 
 // Menu data — taken from the Magic Food paper menu
 const MENU = [
@@ -37,7 +37,7 @@ const MENU = [
   },
   {
     category: "Sallata",
-    image: fries,
+    image: salad,
     items: [
       { name: "Sallat Shope", price: "120" },
       { name: "Sallat e përzier", price: "120" },
@@ -45,7 +45,7 @@ const MENU = [
   },
   {
     category: "Pije",
-    image: hotdog,
+    image: drinks,
     items: [
       { name: "Coca Cola", price: "60/70" },
       { name: "Fanta", price: "60/70" },
@@ -389,10 +389,10 @@ function CTASection() {
         transition={{ duration: 0.7 }}
       >
         <p className="font-script text-2xl sm:text-3xl" style={{ color: "var(--brand-yellow)" }}>
-          Hungry?
+          I uritur?
         </p>
         <h2 className="font-display text-3xl sm:text-5xl tracking-[0.15em] uppercase text-white leading-tight">
-          Order Now
+          Porosit Tani
         </h2>
 
         <motion.a
@@ -411,7 +411,7 @@ function CTASection() {
           transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
         >
           <Phone className="h-5 w-5" />
-          <span className="tracking-wider uppercase">Call Now</span>
+          <span className="tracking-wider uppercase">Telefono</span>
         </motion.a>
 
         <p className="text-sm sm:text-base font-bold tracking-[0.3em]" style={{ color: "var(--brand-yellow)" }}>
@@ -423,10 +423,8 @@ function CTASection() {
           <span className="uppercase tracking-[0.2em]">{LOCATION}</span>
         </div>
 
-        <div className="flex items-center gap-4 mt-2 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-white/70">
-          <span>🚀 Free Delivery</span>
-          <span>•</span>
-          <span>⏰ 24/7 Open</span>
+        <div className="flex items-center gap-2 mt-2 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-white/70">
+          <span>⏰ Hapur 08:00 — 24:00</span>
         </div>
       </motion.div>
     </section>
