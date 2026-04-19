@@ -1,69 +1,181 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/magic-food-logo.svg";
+import { Phone, MapPin, Menu as MenuIcon, X } from "lucide-react";
+import { useState } from "react";
+import logoPng from "@/assets/magic-food-logo.png";
+import logoSvg from "@/assets/magic-food-logo.svg";
 import burger from "@/assets/food-burger.jpg";
 import pizza from "@/assets/food-pizza.jpg";
 import fries from "@/assets/food-fries.jpg";
 import hotdog from "@/assets/food-hotdog.jpg";
 
-// Easy to edit: menu categories, items, prices
+// Menu data — taken from the Magic Food paper menu
 const MENU = [
   {
-    category: "Burgers",
+    category: "Hamburger",
     image: burger,
     items: [
-      { name: "Classic Burger", price: "150" },
-      { name: "Double Cheese", price: "200" },
-      { name: "Magic Special", price: "250" },
+      { name: "Hamburger", price: "140" },
+      { name: "Cheeseburger", price: "170" },
+      { name: "Hamburger shtëpie", desc: "(veze, kashkavall, djathë)", price: "200" },
+      { name: "Magic Burger", desc: "(proshut & kashkavall)", price: "220" },
+      { name: "Suxhuk Burger", price: "140" },
+      { name: "Qebap", price: "250/270" },
+      { name: "Qofte shtëpie", price: "270" },
+      { name: "Pljeskavic Sharri", price: "270" },
+      { name: "File Pule", price: "170" },
+      { name: "File Pule Porcion", price: "190/300" },
+      { name: "Hamburger Porcion", price: "160" },
     ],
   },
   {
-    category: "Pizza",
+    category: "Tost",
     image: pizza,
     items: [
-      { name: "Margherita", price: "250" },
-      { name: "Pepperoni", price: "300" },
-      { name: "Magic Supreme", price: "350" },
+      { name: "Tost", desc: "(sallam, pule, kashkavall)", price: "100" },
+      { name: "Tost Përshut", desc: "(kashkavall)", price: "150" },
     ],
   },
   {
-    category: "Sides",
+    category: "Sallata",
     image: fries,
     items: [
-      { name: "French Fries", price: "100" },
-      { name: "Onion Rings", price: "120" },
-      { name: "Cheese Sticks", price: "150" },
+      { name: "Sallat Shope", price: "120" },
+      { name: "Sallat e përzier", price: "120" },
     ],
   },
   {
-    category: "Hot Dogs",
+    category: "Pije",
     image: hotdog,
     items: [
-      { name: "Classic Dog", price: "120" },
-      { name: "Chili Dog", price: "150" },
-      { name: "Magic Dog", price: "180" },
+      { name: "Coca Cola", price: "60/70" },
+      { name: "Fanta", price: "60/70" },
+      { name: "Fanta Tropikal", price: "60/70" },
+      { name: "Sprite", price: "60/70" },
+      { name: "Schweppes", price: "60/70" },
+      { name: "Ujë", price: "70" },
+      { name: "Ujë me gaze", price: "50" },
+      { name: "Ujë Mineral", price: "40/50" },
+      { name: "Pepsi", price: "70" },
+      { name: "Gazoz", price: "70" },
+      { name: "Golden Eagle", price: "70" },
     ],
   },
 ];
 
-const PHONE_NUMBER = "+389 XX XXX XXX";
+const PHONE_NUMBER = "070-488-300";
+const LOCATION = "Kumanovë";
+
+/* ---------------- NAVBAR ---------------- */
+function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const scrollTo = (id: string) => {
+    setOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <header
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b"
+      style={{
+        background: "oklch(0.08 0.02 30 / 0.85)",
+        borderColor: "oklch(0.62 0.23 27 / 0.3)",
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
+        <button
+          onClick={() => scrollTo("hero")}
+          className="flex items-center gap-2 group"
+          aria-label="Magic Food home"
+        >
+          <img
+            src={logoPng}
+            alt="Magic Food"
+            className="h-12 w-12 object-contain transition-transform group-hover:scale-110"
+            style={{ filter: "drop-shadow(0 0 8px oklch(0.92 0.18 95 / 0.5))" }}
+          />
+          <div className="flex items-baseline gap-1 leading-none">
+            <span
+              className="font-script text-xl"
+              style={{ color: "var(--brand-yellow)" }}
+            >
+              Magic
+            </span>
+            <span
+              className="font-display text-xl uppercase tracking-wider"
+              style={{ color: "var(--brand-orange)" }}
+            >
+              Food
+            </span>
+          </div>
+        </button>
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-6 text-sm uppercase tracking-widest font-semibold text-white/90">
+          <button onClick={() => scrollTo("hero")} className="hover:text-[oklch(0.92_0.18_95)] transition">Home</button>
+          <button onClick={() => scrollTo("menu")} className="hover:text-[oklch(0.92_0.18_95)] transition">Menu</button>
+          <button onClick={() => scrollTo("contact")} className="hover:text-[oklch(0.92_0.18_95)] transition">Contact</button>
+          <a
+            href={`tel:${PHONE_NUMBER.replace(/\D/g, "")}`}
+            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-white"
+            style={{ background: "var(--gradient-cta)", boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.6)" }}
+          >
+            <Phone className="h-4 w-4" /> Call
+          </a>
+        </nav>
+
+        {/* Mobile call + burger */}
+        <div className="flex md:hidden items-center gap-2">
+          <a
+            href={`tel:${PHONE_NUMBER.replace(/\D/g, "")}`}
+            aria-label="Call now"
+            className="inline-flex items-center justify-center h-10 w-10 rounded-full text-white"
+            style={{ background: "var(--gradient-cta)", boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.6)" }}
+          >
+            <Phone className="h-4 w-4" />
+          </a>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            className="inline-flex items-center justify-center h-10 w-10 rounded-full border text-white"
+            style={{ borderColor: "oklch(0.92 0.18 95 / 0.4)" }}
+          >
+            {open ? <X className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <motion.nav
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden border-t"
+          style={{ borderColor: "oklch(0.62 0.23 27 / 0.3)", background: "oklch(0.08 0.02 30 / 0.95)" }}
+        >
+          <div className="flex flex-col px-4 py-3 gap-1 text-sm uppercase tracking-widest font-semibold text-white/90">
+            <button onClick={() => scrollTo("hero")} className="text-left py-2">Home</button>
+            <button onClick={() => scrollTo("menu")} className="text-left py-2">Menu</button>
+            <button onClick={() => scrollTo("contact")} className="text-left py-2">Contact</button>
+          </div>
+        </motion.nav>
+      )}
+    </header>
+  );
+}
 
 /* ---------------- HERO ---------------- */
 function Hero() {
   const scrollToMenu = () => {
-    document
-      .getElementById("menu")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-6">
-      {/* Animated gradient backdrop */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{ background: "var(--gradient-warm)" }}
-      />
-      {/* Rotating glow ring */}
+    <section
+      id="hero"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-8"
+    >
+      <div aria-hidden className="absolute inset-0" style={{ background: "var(--gradient-warm)" }} />
       <motion.div
         aria-hidden
         className="absolute h-[900px] w-[900px] rounded-full opacity-50 blur-3xl"
@@ -75,7 +187,6 @@ function Hero() {
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Floating sparkles */}
       {[...Array(20)].map((_, i) => (
         <motion.span
           key={i}
@@ -86,32 +197,22 @@ function Hero() {
             left: `${5 + Math.random() * 90}%`,
             boxShadow: "0 0 12px oklch(0.92 0.18 95)",
           }}
-          animate={{
-            opacity: [0, 1, 0],
-            scale: [0, 1.4, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 3,
-          }}
+          animate={{ opacity: [0, 1, 0], scale: [0, 1.4, 0], y: [0, -40, 0] }}
+          transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3 }}
         />
       ))}
 
-      {/* FULLSCREEN clickable logo */}
       <motion.button
         type="button"
         onClick={scrollToMenu}
         aria-label="View our menu"
-        className="group relative z-10 flex items-center justify-center w-[min(92vw,92vh)] h-[min(92vw,92vh)] cursor-pointer outline-none bg-transparent border-0"
+        className="group relative z-10 flex items-center justify-center w-[min(85vw,80vh)] h-[min(85vw,80vh)] cursor-pointer outline-none bg-transparent border-0"
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
       >
-        {/* Outer rotating glow */}
         <motion.div
           aria-hidden
           className="absolute inset-0 rounded-full blur-3xl opacity-90"
@@ -123,13 +224,11 @@ function Hero() {
           transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Logo + wordmark stack */}
         <motion.div
           className="relative flex flex-col items-center justify-center w-full h-full"
           animate={{ y: [0, -14, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          {/* Inner soft halo */}
           <motion.div
             aria-hidden
             className="absolute inset-[15%] rounded-full blur-2xl"
@@ -138,86 +237,22 @@ function Hero() {
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
 
-          {/* Original Magic Food logo — large centerpiece */}
           <motion.img
-            src={logo}
+            src={logoSvg}
             alt="Magic Food — tap to view menu"
             width={544}
             height={478}
-            className="relative w-[72%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
+            className="relative w-[78%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
             style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
           />
-
-          {/* Shining wordmark — Magic (gold shimmer) + Food (fiery red) */}
-          <div className="relative -mt-2 flex items-baseline gap-3 sm:gap-4 pointer-events-none">
-            <span
-              className="font-script text-4xl sm:text-6xl md:text-7xl leading-none"
-              style={{
-                color: "transparent",
-                backgroundImage:
-                  "linear-gradient(90deg, #fff5a3, #ffe066, #ffd24a, #ffb84a, #ffe066, #fff5a3, #ffd24a)",
-                backgroundSize: "300% auto",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                animation: "shimmer 2.5s linear infinite",
-                filter:
-                  "drop-shadow(0 0 18px #ffd24a) drop-shadow(0 0 8px #fff5a3) drop-shadow(0 2px 4px rgba(0,0,0,0.4))",
-              }}
-            >
-              Magic
-            </span>
-            <span
-              className="font-display text-5xl sm:text-7xl md:text-8xl tracking-[0.12em] uppercase"
-              style={{
-                color: "transparent",
-                backgroundImage:
-                  "linear-gradient(180deg, #ffb84a 0%, #ff6b3d 35%, #ff3d3d 70%, #c41e1e 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                filter:
-                  "drop-shadow(0 4px 24px #ff3d3d) drop-shadow(0 0 30px #ff6b3d) drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
-                WebkitTextStroke: "1px rgba(255, 215, 100, 0.4)",
-              }}
-            >
-              Food
-            </span>
-          </div>
         </motion.div>
-
-        {/* Corner sparkles */}
-        {[
-          { top: "8%", left: "12%" },
-          { top: "8%", right: "12%" },
-          { bottom: "22%", left: "8%" },
-          { bottom: "22%", right: "8%" },
-          { top: "45%", left: "4%" },
-          { top: "45%", right: "4%" },
-        ].map((pos, i) => (
-          <motion.span
-            key={i}
-            aria-hidden
-            className="absolute h-3 w-3 rounded-full"
-            style={{
-              ...pos,
-              background: "var(--brand-yellow)",
-              boxShadow: "0 0 24px oklch(0.92 0.18 95), 0 0 8px white",
-            }}
-            animate={{ scale: [0, 1.4, 0], opacity: [0, 1, 0] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: i * 0.35,
-            }}
-          />
-        ))}
       </motion.button>
 
-      {/* Tap hint */}
       <motion.p
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-semibold flex items-center gap-2"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-semibold flex items-center gap-2"
         style={{ color: "var(--brand-yellow)" }}
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 2, repeat: Infinity }}
@@ -228,31 +263,31 @@ function Hero() {
   );
 }
 
-/* ---------------- COMPACT MENU (Lord Burger style) ---------------- */
-function MenuColumn({
-  category,
-  index,
-}: {
-  category: (typeof MENU)[number];
-  index: number;
-}) {
-  const imageOnLeft = index % 2 === 0;
+/* ---------------- MENU ---------------- */
+function MenuCategory({ category, index }: { category: (typeof MENU)[number]; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="flex items-center gap-4 sm:gap-5"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="rounded-2xl p-5 sm:p-6"
+      style={{
+        background: "oklch(0.14 0.04 30 / 0.7)",
+        border: "1px solid oklch(0.62 0.23 27 / 0.25)",
+        boxShadow: "0 10px 30px -15px oklch(0 0 0 / 0.6)",
+      }}
     >
-      {imageOnLeft && (
-        <CategoryImage src={category.image} alt={category.category} />
-      )}
-
-      <div className="flex-1 min-w-0">
-        {/* Category label */}
-        <div
-          className="inline-block px-3 py-1 rounded-md mb-2 font-display text-sm tracking-[0.2em] uppercase"
+      <div className="flex items-center gap-3 mb-4">
+        <img
+          src={category.image}
+          alt={category.category}
+          loading="lazy"
+          className="h-14 w-14 rounded-full object-cover shrink-0"
+          style={{ boxShadow: "0 0 0 2px oklch(0.75 0.19 55), 0 0 20px oklch(0.62 0.23 27 / 0.5)" }}
+        />
+        <h3
+          className="font-display text-xl sm:text-2xl tracking-[0.2em] uppercase px-3 py-1 rounded-md"
           style={{
             background: "var(--gradient-cta)",
             color: "white",
@@ -260,57 +295,32 @@ function MenuColumn({
           }}
         >
           {category.category}
-        </div>
-        {/* Items */}
-        <ul className="space-y-1">
-          {category.items.map((item) => (
-            <li
-              key={item.name}
-              className="flex items-baseline gap-2 text-sm sm:text-base"
-            >
-              <span className="text-white/90 font-medium">{item.name}</span>
-              <span
-                className="flex-1 border-b border-dotted opacity-30"
-                style={{ borderColor: "var(--brand-yellow)" }}
-              />
-              <span
-                className="font-display tracking-wider"
-                style={{ color: "var(--brand-yellow)" }}
-              >
-                {item.price}
-                <span className="text-[10px] opacity-70 ml-1">den</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        </h3>
       </div>
 
-      {!imageOnLeft && (
-        <CategoryImage src={category.image} alt={category.category} />
-      )}
-    </motion.div>
-  );
-}
-
-function CategoryImage({ src, alt }: { src: string; alt: string }) {
-  return (
-    <motion.div
-      className="relative shrink-0 h-24 w-24 sm:h-28 sm:w-28 rounded-full overflow-hidden"
-      style={{
-        boxShadow:
-          "0 0 0 3px oklch(0.75 0.19 55), 0 0 30px oklch(0.62 0.23 27 / 0.6)",
-      }}
-      whileHover={{ scale: 1.05, rotate: 5 }}
-      transition={{ duration: 0.3 }}
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        width={300}
-        height={300}
-        className="h-full w-full object-cover"
-      />
+      <ul className="space-y-2">
+        {category.items.map((item) => (
+          <li key={item.name} className="flex items-baseline gap-2 text-sm sm:text-base">
+            <div className="flex-1 min-w-0">
+              <span className="text-white/95 font-medium">{item.name}</span>
+              {"desc" in item && item.desc && (
+                <span className="block text-[11px] text-white/55 italic">{item.desc}</span>
+              )}
+            </div>
+            <span
+              className="flex-1 border-b border-dotted opacity-30 self-end mb-1.5"
+              style={{ borderColor: "var(--brand-yellow)" }}
+            />
+            <span
+              className="font-display tracking-wider whitespace-nowrap"
+              style={{ color: "var(--brand-yellow)" }}
+            >
+              {item.price}
+              <span className="text-[10px] opacity-70 ml-1">den</span>
+            </span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }
@@ -319,7 +329,7 @@ function MenuSection() {
   return (
     <section
       id="menu"
-      className="relative py-14 sm:py-20 px-4 sm:px-8 scroll-mt-0"
+      className="relative py-14 sm:py-20 px-4 sm:px-8 scroll-mt-16"
       style={{
         background:
           "linear-gradient(180deg, oklch(0.12 0.04 35) 0%, oklch(0.08 0.02 30) 100%)",
@@ -332,10 +342,7 @@ function MenuSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        <p
-          className="font-script text-xl sm:text-2xl mb-1"
-          style={{ color: "var(--brand-orange)" }}
-        >
+        <p className="font-script text-xl sm:text-2xl mb-1" style={{ color: "var(--brand-orange)" }}>
           Our Delicious
         </p>
         <h2
@@ -351,26 +358,24 @@ function MenuSection() {
         >
           Menu
         </h2>
-        <div
-          className="mx-auto mt-3 h-[2px] w-20"
-          style={{ background: "var(--gradient-gold)" }}
-        />
+        <div className="mx-auto mt-3 h-[2px] w-20" style={{ background: "var(--gradient-gold)" }} />
       </motion.div>
 
-      <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:gap-8">
+      <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
         {MENU.map((cat, i) => (
-          <MenuColumn key={cat.category} category={cat} index={i} />
+          <MenuCategory key={cat.category} category={cat} index={i} />
         ))}
       </div>
     </section>
   );
 }
 
-/* ---------------- CTA ---------------- */
+/* ---------------- CTA / CONTACT ---------------- */
 function CTASection() {
   return (
     <section
-      className="relative py-14 px-4"
+      id="contact"
+      className="relative py-14 px-4 scroll-mt-16"
       style={{
         background:
           "radial-gradient(ellipse at center, oklch(0.4 0.18 35) 0%, oklch(0.12 0.04 30) 70%)",
@@ -383,10 +388,7 @@ function CTASection() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        <p
-          className="font-script text-2xl sm:text-3xl"
-          style={{ color: "var(--brand-yellow)" }}
-        >
+        <p className="font-script text-2xl sm:text-3xl" style={{ color: "var(--brand-yellow)" }}>
           Hungry?
         </p>
         <h2 className="font-display text-3xl sm:text-5xl tracking-[0.15em] uppercase text-white leading-tight">
@@ -394,12 +396,9 @@ function CTASection() {
         </h2>
 
         <motion.a
-          href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
+          href={`tel:${PHONE_NUMBER.replace(/\D/g, "")}`}
           className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-lg sm:text-xl font-bold text-white"
-          style={{
-            background: "var(--gradient-cta)",
-            boxShadow: "var(--shadow-cta)",
-          }}
+          style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
           animate={{
@@ -411,16 +410,18 @@ function CTASection() {
           }}
           transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
         >
-          <span className="text-xl">📞</span>
+          <Phone className="h-5 w-5" />
           <span className="tracking-wider uppercase">Call Now</span>
         </motion.a>
 
-        <p
-          className="text-sm sm:text-base font-bold tracking-[0.3em]"
-          style={{ color: "var(--brand-yellow)" }}
-        >
+        <p className="text-sm sm:text-base font-bold tracking-[0.3em]" style={{ color: "var(--brand-yellow)" }}>
           {PHONE_NUMBER}
         </p>
+
+        <div className="flex items-center gap-2 text-white/80 text-sm">
+          <MapPin className="h-4 w-4" style={{ color: "var(--brand-orange)" }} />
+          <span className="uppercase tracking-[0.2em]">{LOCATION}</span>
+        </div>
 
         <div className="flex items-center gap-4 mt-2 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-white/70">
           <span>🚀 Free Delivery</span>
@@ -435,6 +436,7 @@ function CTASection() {
 export function MagicFoodPromo() {
   return (
     <main className="font-body bg-background text-foreground">
+      <Navbar />
       <Hero />
       <MenuSection />
       <CTASection />
