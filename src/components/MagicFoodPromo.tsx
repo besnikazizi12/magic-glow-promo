@@ -222,13 +222,13 @@ function Hero() {
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.span
-          className="font-script text-2xl sm:text-3xl mb-3"
-          style={{ color: "var(--brand-yellow)", textShadow: "0 0 20px oklch(0.92 0.18 95 / 0.6)" }}
+          className="font-script text-2xl sm:text-3xl mb-3 inline-flex items-baseline gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          ✦ Magic Food ✦
+          <span style={{ color: "#f5d800", textShadow: "0 0 20px oklch(0.92 0.18 95 / 0.6)" }}>✦ Magic</span>
+          <span style={{ color: "#e8142a", textShadow: "0 0 20px oklch(0.62 0.23 27 / 0.7)" }}>Food ✦</span>
         </motion.span>
 
         <motion.h1
