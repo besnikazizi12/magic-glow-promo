@@ -201,63 +201,93 @@ function Hero() {
         />
       ))}
 
-      <motion.button
-        type="button"
-        onClick={scrollToMenu}
-        aria-label="View our menu"
-        className="group relative z-10 flex items-center justify-center w-[min(85vw,80vh)] h-[min(85vw,80vh)] cursor-pointer outline-none bg-transparent border-0"
-        initial={{ opacity: 0, scale: 0.7 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl px-2"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.div
-          aria-hidden
-          className="absolute inset-0 rounded-full blur-3xl opacity-90"
-          style={{
-            background:
-              "conic-gradient(from 0deg, oklch(0.62 0.23 27 / 0.7), oklch(0.92 0.18 95 / 0.7), oklch(0.75 0.19 55 / 0.7), oklch(0.62 0.23 27 / 0.7))",
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-        />
-
-        <motion.div
-          className="relative flex flex-col items-center justify-center w-full h-full"
-          animate={{ y: [0, -14, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        <motion.span
+          className="font-script text-2xl sm:text-3xl mb-3"
+          style={{ color: "var(--brand-yellow)", textShadow: "0 0 20px oklch(0.92 0.18 95 / 0.6)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
         >
-          <motion.div
-            aria-hidden
-            className="absolute inset-[15%] rounded-full blur-2xl"
-            style={{ background: "oklch(0.75 0.19 55 / 0.55)" }}
-            animate={{ opacity: [0.4, 0.85, 0.4], scale: [0.9, 1.1, 0.9] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
+          ✦ Magic Food ✦
+        </motion.span>
 
-          <motion.img
-            src={logoPng}
-            alt="Magic Food — kliko për menu"
-            width={544}
-            height={478}
-            className="relative w-[78%] h-auto transition-all duration-500 group-hover:drop-shadow-[0_0_60px_oklch(0.92_0.18_95/0.9)]"
-            style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          />
+        <motion.h1
+          className="font-display text-4xl sm:text-6xl md:text-7xl uppercase leading-[1.05] tracking-tight"
+          style={{
+            color: "transparent",
+            backgroundImage:
+              "linear-gradient(180deg, #fff5a3 0%, #ffd24a 35%, #ff8a3d 65%, #ff3d3d 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            filter:
+              "drop-shadow(0 4px 24px oklch(0.62 0.23 27 / 0.6)) drop-shadow(0 0 30px oklch(0.92 0.18 95 / 0.4))",
+          }}
+        >
+          Ushqim Magjik,
+          <br />
+          <span className="block mt-1">Shije e Paharrueshme</span>
+        </motion.h1>
+
+        <motion.p
+          className="mt-6 text-base sm:text-lg md:text-xl text-white/85 max-w-xl leading-relaxed"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          Burgera të freskët, tosta të shijshme, sallata dhe pije —
+          të gjitha të përgatitura me dashuri në Kumanovë.
+        </motion.p>
+
+        <motion.div
+          className="mt-8 flex flex-col sm:flex-row items-center gap-3"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          <motion.button
+            type="button"
+            onClick={scrollToMenu}
+            className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base sm:text-lg font-bold text-white uppercase tracking-wider"
+            style={{
+              background: "var(--gradient-cta)",
+              boxShadow: "var(--shadow-cta)",
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            animate={{
+              boxShadow: [
+                "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
+                "0 25px 70px -10px oklch(0.62 0.23 27 / 0.95)",
+                "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
+              ],
+            }}
+            transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
+          >
+            🍔 Porosit Tani
+          </motion.button>
+
+          <a
+            href="#menu"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToMenu();
+            }}
+            className="text-sm uppercase tracking-[0.3em] font-semibold px-6 py-3 rounded-full border transition hover:bg-white/5"
+            style={{
+              color: "var(--brand-yellow)",
+              borderColor: "oklch(0.92 0.18 95 / 0.4)",
+            }}
+          >
+            Shiko Menun
+          </a>
         </motion.div>
-      </motion.button>
-
-      <motion.p
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-semibold flex items-center gap-2"
-        style={{ color: "var(--brand-yellow)" }}
-        animate={{ opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        ✦ Kliko logon për menu ✦
-      </motion.p>
+      </motion.div>
     </section>
   );
 }
