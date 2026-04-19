@@ -91,7 +91,7 @@ function Navbar() {
           <img
             src={logoPng}
             alt="Magic Food"
-            className="h-[50px] w-[50px] object-contain transition-transform group-hover:scale-110"
+            className="h-9 w-9 sm:h-[50px] sm:w-[50px] object-contain transition-transform group-hover:scale-110"
             style={{ filter: "drop-shadow(0 0 8px oklch(0.92 0.18 95 / 0.5))" }}
           />
           <div className="flex items-baseline gap-1 leading-none">
@@ -176,6 +176,8 @@ function Hero() {
       className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-8"
     >
       <div aria-hidden className="absolute inset-0" style={{ background: "var(--gradient-warm)" }} />
+      {/* Dark overlay for text readability */}
+      <div aria-hidden className="absolute inset-0 bg-black/40 sm:bg-black/30" />
       <motion.div
         aria-hidden
         className="absolute h-[900px] w-[900px] rounded-full opacity-50 blur-3xl"
@@ -230,12 +232,12 @@ function Hero() {
         </motion.span>
 
         <motion.h1
-          className="font-display text-5xl sm:text-7xl md:text-8xl uppercase leading-[1.05] tracking-tight font-black"
+          className="font-display text-3xl sm:text-6xl md:text-8xl uppercase leading-[1.1] tracking-tight font-black"
           style={{
             color: "#fffaf0",
             textShadow:
               "0 2px 0 #c41e1e, 0 4px 12px rgba(0,0,0,0.9), 0 0 40px oklch(0.62 0.23 27 / 0.8), 0 0 80px oklch(0.92 0.18 95 / 0.4)",
-            WebkitTextStroke: "1.5px #c41e1e",
+            WebkitTextStroke: "1px #c41e1e",
           }}
         >
           Ushqim Magjik,
@@ -246,7 +248,7 @@ function Hero() {
               color: "#ffd24a",
               textShadow:
                 "0 2px 0 #8a1010, 0 4px 16px rgba(0,0,0,0.95), 0 0 40px oklch(0.92 0.18 95 / 0.7)",
-              WebkitTextStroke: "1.5px #8a1010",
+              WebkitTextStroke: "1px #8a1010",
             }}
           >
             Shije e Paharrueshme
@@ -254,7 +256,7 @@ function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-6 text-lg sm:text-xl md:text-2xl text-white max-w-xl leading-relaxed font-semibold"
+          className="mt-5 sm:mt-6 text-base sm:text-xl md:text-2xl text-white max-w-xl leading-relaxed font-semibold px-2"
           style={{ textShadow: "0 2px 12px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)" }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -265,7 +267,7 @@ function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-8 flex flex-col sm:flex-row items-center gap-3"
+          className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto px-2 sm:px-0"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
@@ -273,7 +275,7 @@ function Hero() {
           <motion.button
             type="button"
             onClick={scrollToMenu}
-            className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base sm:text-lg font-bold text-white uppercase tracking-wider"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-8 py-4 text-base sm:text-lg font-bold text-white uppercase tracking-wider"
             style={{
               background: "var(--gradient-cta)",
               boxShadow: "var(--shadow-cta)",
@@ -298,7 +300,7 @@ function Hero() {
               e.preventDefault();
               scrollToMenu();
             }}
-            className="text-sm uppercase tracking-[0.3em] font-semibold px-6 py-3 rounded-full border transition hover:bg-white/5"
+            className="w-full sm:w-auto text-center text-sm uppercase tracking-[0.3em] font-semibold px-6 py-3 rounded-full border transition hover:bg-white/5"
             style={{
               color: "var(--brand-yellow)",
               borderColor: "oklch(0.92 0.18 95 / 0.4)",
