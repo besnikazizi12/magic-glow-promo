@@ -96,13 +96,13 @@ function Navbar() {
           />
           <div className="flex items-baseline gap-1 leading-none">
             <span
-              className="font-script text-xl"
+              className="font-script text-base sm:text-xl"
               style={{ color: "var(--brand-yellow)" }}
             >
               Magic
             </span>
             <span
-              className="font-display text-xl uppercase tracking-wider"
+              className="font-display text-base sm:text-xl uppercase tracking-wider"
               style={{ color: "var(--brand-orange)" }}
             >
               Food
@@ -154,9 +154,9 @@ function Navbar() {
           style={{ borderColor: "oklch(0.62 0.23 27 / 0.3)", background: "oklch(0.08 0.02 30 / 0.95)" }}
         >
           <div className="flex flex-col px-4 py-3 gap-1 text-sm uppercase tracking-widest font-semibold text-white/90">
-            <button onClick={() => scrollTo("hero")} className="text-left py-2">Home</button>
-            <button onClick={() => scrollTo("menu")} className="text-left py-2">Menu</button>
-            <button onClick={() => scrollTo("contact")} className="text-left py-2">Contact</button>
+            <button onClick={() => scrollTo("hero")} className="text-left py-3 active:bg-white/5 rounded">Home</button>
+            <button onClick={() => scrollTo("menu")} className="text-left py-3 active:bg-white/5 rounded">Menu</button>
+            <button onClick={() => scrollTo("contact")} className="text-left py-3 active:bg-white/5 rounded">Contact</button>
           </div>
         </motion.nav>
       )}
@@ -322,7 +322,7 @@ function MenuCategory({ category, index }: { category: (typeof MENU)[number]; in
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="rounded-2xl p-5 sm:p-6"
+      className="rounded-2xl p-4 sm:p-6"
       style={{
         background: "oklch(0.14 0.04 30 / 0.7)",
         border: "1px solid oklch(0.62 0.23 27 / 0.25)",
@@ -334,11 +334,11 @@ function MenuCategory({ category, index }: { category: (typeof MENU)[number]; in
           src={category.image}
           alt={category.category}
           loading="lazy"
-          className="h-14 w-14 rounded-full object-cover shrink-0"
+          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full object-cover shrink-0"
           style={{ boxShadow: "0 0 0 2px oklch(0.75 0.19 55), 0 0 20px oklch(0.62 0.23 27 / 0.5)" }}
         />
         <h3
-          className="font-display text-xl sm:text-2xl tracking-[0.2em] uppercase px-3 py-1 rounded-md"
+          className="font-display text-base sm:text-2xl tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-1 rounded-md"
           style={{
             background: "var(--gradient-cta)",
             color: "white",
@@ -380,7 +380,7 @@ function MenuSection() {
   return (
     <section
       id="menu"
-      className="relative py-14 sm:py-20 px-4 sm:px-8 scroll-mt-16"
+      className="relative py-12 sm:py-20 px-3 sm:px-8 scroll-mt-16"
       style={{
         background:
           "linear-gradient(180deg, oklch(0.12 0.04 35) 0%, oklch(0.08 0.02 30) 100%)",
@@ -397,7 +397,7 @@ function MenuSection() {
           Our Delicious
         </p>
         <h2
-          className="font-display text-5xl sm:text-7xl tracking-[0.15em] uppercase leading-none"
+          className="font-display text-4xl sm:text-7xl tracking-[0.15em] uppercase leading-none"
           style={{
             color: "transparent",
             backgroundImage:
@@ -412,7 +412,7 @@ function MenuSection() {
         <div className="mx-auto mt-3 h-[2px] w-20" style={{ background: "var(--gradient-gold)" }} />
       </motion.div>
 
-      <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      <div className="max-w-3xl mx-auto grid grid-cols-1 gap-4 sm:gap-6">
         {MENU.map((cat, i) => (
           <MenuCategory key={cat.category} category={cat} index={i} />
         ))}
@@ -426,14 +426,14 @@ function CTASection() {
   return (
     <section
       id="contact"
-      className="relative py-14 px-4 scroll-mt-16"
+      className="relative py-12 sm:py-14 px-4 scroll-mt-16"
       style={{
         background:
           "radial-gradient(ellipse at center, oklch(0.4 0.18 35) 0%, oklch(0.12 0.04 30) 70%)",
       }}
     >
       <motion.div
-        className="max-w-xl mx-auto text-center flex flex-col items-center gap-5"
+        className="max-w-xl mx-auto text-center flex flex-col items-center gap-4 sm:gap-5 px-2"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -448,7 +448,7 @@ function CTASection() {
 
         <motion.a
           href={`tel:${PHONE_TEL}`}
-          className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-lg sm:text-xl font-bold text-white"
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-xl font-bold text-white"
           style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
@@ -465,9 +465,13 @@ function CTASection() {
           <span className="tracking-wider uppercase">Telefono</span>
         </motion.a>
 
-        <p className="text-sm sm:text-base font-bold tracking-[0.3em]" style={{ color: "var(--brand-yellow)" }}>
+        <a
+          href={`tel:${PHONE_TEL}`}
+          className="text-base sm:text-base font-bold tracking-[0.25em] sm:tracking-[0.3em] underline-offset-4 hover:underline"
+          style={{ color: "var(--brand-yellow)" }}
+        >
           {PHONE_NUMBER}
-        </p>
+        </a>
 
         <div className="flex items-center gap-2 text-white/80 text-sm">
           <MapPin className="h-4 w-4" style={{ color: "var(--brand-orange)" }} />
