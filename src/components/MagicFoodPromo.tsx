@@ -192,8 +192,8 @@ function Hero() {
         aria-hidden
         src={logoPng}
         alt=""
-        className="absolute pointer-events-none select-none w-[min(95vw,750px)] h-auto opacity-[0.08] mix-blend-screen"
-        style={{ filter: "drop-shadow(0 0 60px oklch(0.92 0.18 95 / 0.5))" }}
+        className="absolute pointer-events-none select-none w-[min(110vw,900px)] h-auto opacity-25"
+        style={{ filter: "drop-shadow(0 0 80px oklch(0.92 0.18 95 / 0.7)) drop-shadow(0 0 40px oklch(0.62 0.23 27 / 0.6))" }}
         animate={{ scale: [1, 1.04, 1], rotate: [0, 2, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
