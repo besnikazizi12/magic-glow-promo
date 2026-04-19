@@ -4,7 +4,7 @@ import { useState } from "react";
 import logoPng from "@/assets/magic-food-logo.png";
 import logoSvg from "@/assets/magic-food-logo.svg";
 import burger from "@/assets/food-burger.jpg";
-import pizza from "@/assets/food-pizza.jpg";
+import tost from "@/assets/food-tost.jpg";
 import salad from "@/assets/food-salad.jpg";
 import drinks from "@/assets/food-drinks.jpg";
 
@@ -29,7 +29,7 @@ const MENU = [
   },
   {
     category: "Tost",
-    image: pizza,
+    image: tost,
     items: [
       { name: "Tost", desc: "(sallam, pule, kashkavall)", price: "100" },
       { name: "Tost Përshut", desc: "(kashkavall)", price: "150" },
