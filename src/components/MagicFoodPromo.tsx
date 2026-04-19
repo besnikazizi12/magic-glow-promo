@@ -187,6 +187,17 @@ function Hero() {
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       />
 
+      {/* Background watermark logo */}
+      <motion.img
+        aria-hidden
+        src={logoPng}
+        alt=""
+        className="absolute pointer-events-none select-none w-[min(95vw,750px)] h-auto opacity-[0.08] mix-blend-screen"
+        style={{ filter: "drop-shadow(0 0 60px oklch(0.92 0.18 95 / 0.5))" }}
+        animate={{ scale: [1, 1.04, 1], rotate: [0, 2, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       {[...Array(20)].map((_, i) => (
         <motion.span
           key={i}
