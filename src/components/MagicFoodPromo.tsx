@@ -103,7 +103,7 @@ function Navbar() {
             </span>
             <span
               className="font-display text-base sm:text-xl uppercase tracking-wider"
-              style={{ color: "var(--brand-orange)" }}
+              style={{ color: "#e8142a" }}
             >
               Food
             </span>
