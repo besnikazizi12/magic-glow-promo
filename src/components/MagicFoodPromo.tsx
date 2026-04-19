@@ -230,24 +230,32 @@ function Hero() {
         </motion.span>
 
         <motion.h1
-          className="font-display text-4xl sm:text-6xl md:text-7xl uppercase leading-[1.05] tracking-tight"
+          className="font-display text-5xl sm:text-7xl md:text-8xl uppercase leading-[1.05] tracking-tight font-black"
           style={{
-            color: "transparent",
-            backgroundImage:
-              "linear-gradient(180deg, #fff5a3 0%, #ffd24a 35%, #ff8a3d 65%, #ff3d3d 100%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            filter:
-              "drop-shadow(0 4px 24px oklch(0.62 0.23 27 / 0.6)) drop-shadow(0 0 30px oklch(0.92 0.18 95 / 0.4))",
+            color: "#fffaf0",
+            textShadow:
+              "0 2px 0 #c41e1e, 0 4px 12px rgba(0,0,0,0.9), 0 0 40px oklch(0.62 0.23 27 / 0.8), 0 0 80px oklch(0.92 0.18 95 / 0.4)",
+            WebkitTextStroke: "1.5px #c41e1e",
           }}
         >
           Ushqim Magjik,
           <br />
-          <span className="block mt-1">Shije e Paharrueshme</span>
+          <span
+            className="block mt-2"
+            style={{
+              color: "#ffd24a",
+              textShadow:
+                "0 2px 0 #8a1010, 0 4px 16px rgba(0,0,0,0.95), 0 0 40px oklch(0.92 0.18 95 / 0.7)",
+              WebkitTextStroke: "1.5px #8a1010",
+            }}
+          >
+            Shije e Paharrueshme
+          </span>
         </motion.h1>
 
         <motion.p
-          className="mt-6 text-base sm:text-lg md:text-xl text-white/85 max-w-xl leading-relaxed"
+          className="mt-6 text-lg sm:text-xl md:text-2xl text-white max-w-xl leading-relaxed font-semibold"
+          style={{ textShadow: "0 2px 12px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)" }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
