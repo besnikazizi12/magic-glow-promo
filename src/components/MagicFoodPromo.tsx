@@ -62,6 +62,7 @@ const MENU = [
 ];
 
 const PHONE_NUMBER = "070-488-300";
+const PHONE_TEL = "+38970488300";
 const LOCATION = "Kumanovë";
 
 /* ---------------- NAVBAR ---------------- */
@@ -115,7 +116,7 @@ function Navbar() {
           <button onClick={() => scrollTo("menu")} className="hover:text-[oklch(0.92_0.18_95)] transition">Menu</button>
           <button onClick={() => scrollTo("contact")} className="hover:text-[oklch(0.92_0.18_95)] transition">Contact</button>
           <a
-            href={`tel:${PHONE_NUMBER.replace(/\D/g, "")}`}
+            href={`tel:${PHONE_TEL}`}
             className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-white"
             style={{ background: "var(--gradient-cta)", boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.6)" }}
           >
@@ -126,7 +127,7 @@ function Navbar() {
         {/* Mobile call + burger */}
         <div className="flex md:hidden items-center gap-2">
           <a
-            href={`tel:${PHONE_NUMBER.replace(/\D/g, "")}`}
+            href={`tel:${PHONE_TEL}`}
             aria-label="Call now"
             className="inline-flex items-center justify-center h-10 w-10 rounded-full text-white"
             style={{ background: "var(--gradient-cta)", boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.6)" }}
@@ -425,7 +426,7 @@ function CTASection() {
         </h2>
 
         <motion.a
-          href={`tel:${PHONE_NUMBER.replace(/\D/g, "")}`}
+          href={`tel:${PHONE_TEL}`}
           className="inline-flex items-center justify-center gap-3 rounded-full px-10 py-5 text-lg sm:text-xl font-bold text-white"
           style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
           whileHover={{ scale: 1.05 }}
