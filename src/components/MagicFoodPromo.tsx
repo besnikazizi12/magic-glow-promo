@@ -62,6 +62,7 @@ const MENU = [
 ];
 
 const PHONE_NUMBER = "070-488-300";
+const PHONE_TEL = "+38970488300";
 const LOCATION = "Kumanovë";
 
 /* ---------------- NAVBAR ---------------- */
