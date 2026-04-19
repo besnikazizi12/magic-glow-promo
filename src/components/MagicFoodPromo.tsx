@@ -90,7 +90,7 @@ function Navbar() {
           <img
             src={logoPng}
             alt="Magic Food"
-            className="h-12 w-12 object-contain transition-transform group-hover:scale-110"
+            className="h-[50px] w-[50px] object-contain transition-transform group-hover:scale-110"
             style={{ filter: "drop-shadow(0 0 8px oklch(0.92 0.18 95 / 0.5))" }}
           />
           <div className="flex items-baseline gap-1 leading-none">
