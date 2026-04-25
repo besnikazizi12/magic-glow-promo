@@ -222,13 +222,38 @@ function Hero() {
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.span
-          className="font-script text-2xl sm:text-3xl mb-3 inline-flex items-baseline gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          className="font-script text-4xl sm:text-5xl md:text-6xl mb-5 sm:mb-6 inline-flex items-baseline gap-3 px-5 py-2 rounded-full backdrop-blur-md border"
+          style={{
+            background: "oklch(0.08 0.02 30 / 0.55)",
+            borderColor: "oklch(0.92 0.18 95 / 0.5)",
+            boxShadow:
+              "0 8px 30px -8px oklch(0 0 0 / 0.7), inset 0 0 0 1px oklch(0.92 0.18 95 / 0.15), 0 0 40px oklch(0.92 0.18 95 / 0.25)",
+          }}
+          initial={{ opacity: 0, scale: 0.85, y: -10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span style={{ color: "#f5d800", textShadow: "0 0 20px oklch(0.92 0.18 95 / 0.6)" }}>✦ Magic</span>
-          <span style={{ color: "#e8142a", textShadow: "0 0 20px oklch(0.62 0.23 27 / 0.7)" }}>Food ✦</span>
+          <span
+            style={{
+              color: "#ffd900",
+              textShadow:
+                "0 2px 0 #8a1010, 0 0 24px oklch(0.92 0.18 95 / 0.95), 0 0 48px oklch(0.92 0.18 95 / 0.6)",
+              WebkitTextStroke: "0.5px #8a1010",
+            }}
+          >
+            ✦ Magic
+          </span>
+          <span
+            className="font-display uppercase tracking-wider text-3xl sm:text-4xl md:text-5xl"
+            style={{
+              color: "#ff2a3a",
+              textShadow:
+                "0 2px 0 #5a0808, 0 0 24px oklch(0.62 0.23 27 / 0.95), 0 0 48px oklch(0.62 0.23 27 / 0.6)",
+              WebkitTextStroke: "0.5px #5a0808",
+            }}
+          >
+            Food ✦
+          </span>
         </motion.span>
 
         <motion.h1
