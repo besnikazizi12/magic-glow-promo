@@ -173,7 +173,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-8"
+      className="relative h-screen min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-16 pb-4 sm:pt-20 sm:pb-8"
     >
       <div aria-hidden className="absolute inset-0" style={{ background: "var(--gradient-warm)" }} />
       {/* Dark overlay for text readability */}
