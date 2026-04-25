@@ -309,6 +309,37 @@ function Hero() {
             Shiko Menun
           </a>
         </motion.div>
+
+        <motion.div
+          className="mt-6 sm:mt-8 flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-3"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+        >
+          {[
+            { icon: "🔥", label: "E Freskët" },
+            { icon: "⚡", label: "E Shpejtë" },
+            { icon: "❤️", label: "Me Dashuri" },
+          ].map((f) => (
+            <span
+              key={f.label}
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white backdrop-blur-sm border"
+              style={{
+                background: "oklch(0.08 0.02 30 / 0.55)",
+                borderColor: "oklch(0.92 0.18 95 / 0.45)",
+                boxShadow: "0 4px 14px -4px oklch(0 0 0 / 0.6), inset 0 0 0 1px oklch(0.92 0.18 95 / 0.1)",
+              }}
+            >
+              <span
+                className="text-sm sm:text-base"
+                style={{ filter: "drop-shadow(0 0 6px oklch(0.92 0.18 95 / 0.8))" }}
+              >
+                {f.icon}
+              </span>
+              <span className="tracking-wide">{f.label}</span>
+            </span>
+          ))}
+        </motion.div>
       </motion.div>
     </section>
   );
