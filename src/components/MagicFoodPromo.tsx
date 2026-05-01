@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Phone, MapPin, Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 import logoPng from "@/assets/magic-food-logo.png";
+import heroPoster from "@/assets/hero-burger-poster.png";
 import burger from "@/assets/food-burger.jpg";
 import tost from "@/assets/food-tost.jpg";
 import salad from "@/assets/food-salad.jpg";
 import drinks from "@/assets/food-drinks.jpg";
 
-// Menu data — taken from the Magic Food paper menu
 const MENU = [
   {
     category: "Hamburger",
@@ -64,81 +64,116 @@ const MENU = [
 const PHONE_NUMBER = "070-488-300";
 const PHONE_TEL = "+38970488300";
 const LOCATION = "Kumanovë";
+const YELLOW = "#FFB800";
+const RED = "#CC0000";
+const NAV_BG = "#0a0a0a";
+
+const NAV_ITEMS = [
+  { id: "hero", label: "Kreu" },
+  { id: "menu", label: "Menuja" },
+  { id: "galeria", label: "Galeria" },
+  { id: "rreth", label: "Rreth Nesh" },
+  { id: "contact", label: "Kontakt" },
+];
 
 /* ---------------- NAVBAR ---------------- */
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("hero");
+  const [lang, setLang] = useState<"SQ" | "EN">("SQ");
 
   const scrollTo = (id: string) => {
     setOpen(false);
+    setActive(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b"
-      style={{
-        background: "oklch(0.08 0.02 30 / 0.85)",
-        borderColor: "oklch(0.62 0.23 27 / 0.3)",
-      }}
+      className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/5"
+      style={{ background: NAV_BG }}
     >
-      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+        {/* Logo */}
         <button
           onClick={() => scrollTo("hero")}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group shrink-0"
           aria-label="Magic Food home"
         >
           <img
             src={logoPng}
             alt="Magic Food"
-            className="h-9 w-9 sm:h-[50px] sm:w-[50px] object-contain transition-transform group-hover:scale-110"
-            style={{ filter: "drop-shadow(0 0 8px oklch(0.92 0.18 95 / 0.5))" }}
+            className="h-10 w-10 rounded-full object-contain"
           />
-          <div className="flex items-baseline gap-1 leading-none">
-            <span
-              className="font-script text-base sm:text-xl"
-              style={{ color: "var(--brand-yellow)" }}
-            >
-              Magic
-            </span>
-            <span
-              className="font-display text-base sm:text-xl uppercase tracking-wider"
-              style={{ color: "#e8142a" }}
-            >
-              Food
-            </span>
+          <div
+            className="font-condensed font-black text-lg sm:text-xl uppercase tracking-wider leading-none flex gap-1"
+          >
+            <span className="text-white">MAGIC</span>
+            <span style={{ color: YELLOW }}>FOOD</span>
           </div>
         </button>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm uppercase tracking-widest font-semibold text-white/90">
-          <button onClick={() => scrollTo("hero")} className="hover:text-[oklch(0.92_0.18_95)] transition">Home</button>
-          <button onClick={() => scrollTo("menu")} className="hover:text-[oklch(0.92_0.18_95)] transition">Menu</button>
-          <button onClick={() => scrollTo("contact")} className="hover:text-[oklch(0.92_0.18_95)] transition">Contact</button>
-          <a
-            href={`tel:${PHONE_TEL}`}
-            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-white"
-            style={{ background: "var(--gradient-cta)", boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.6)" }}
-          >
-            <Phone className="h-4 w-4" /> Call
-          </a>
+        {/* Desktop nav links */}
+        <nav className="hidden lg:flex items-center gap-7 text-[13px] font-condensed font-bold uppercase tracking-[0.15em]">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="transition-colors"
+              style={{
+                color: active === item.id ? YELLOW : "rgba(255,255,255,0.85)",
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
 
-        {/* Mobile call + burger */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Right side: lang switcher + call */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Lang switcher */}
+          <div className="hidden sm:flex items-center rounded-full p-1 bg-white/5 border border-white/10 text-[11px] font-condensed font-bold tracking-wider">
+            <button
+              onClick={() => setLang("SQ")}
+              className="px-2.5 py-1 rounded-full transition"
+              style={{
+                background: lang === "SQ" ? YELLOW : "transparent",
+                color: lang === "SQ" ? "#000" : "rgba(255,255,255,0.7)",
+              }}
+            >
+              SQ
+            </button>
+            <span className="px-1 text-white/30">|</span>
+            <button
+              onClick={() => setLang("EN")}
+              className="px-2.5 py-1 rounded-full transition"
+              style={{
+                background: lang === "EN" ? YELLOW : "transparent",
+                color: lang === "EN" ? "#000" : "rgba(255,255,255,0.7)",
+              }}
+            >
+              EN
+            </button>
+          </div>
+
+          {/* Call pill */}
           <a
             href={`tel:${PHONE_TEL}`}
-            aria-label="Call now"
-            className="inline-flex items-center justify-center h-10 w-10 rounded-full text-white"
-            style={{ background: "var(--gradient-cta)", boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.6)" }}
+            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-4 py-2 text-white text-[12px] sm:text-[13px] font-condensed font-black uppercase tracking-wider"
+            style={{
+              background: RED,
+              boxShadow: "0 6px 18px -4px rgba(204,0,0,0.6)",
+            }}
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-3.5 w-3.5" />
+            <span>{PHONE_NUMBER}</span>
           </a>
+
+          {/* Mobile burger */}
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
-            className="inline-flex items-center justify-center h-10 w-10 rounded-full border text-white"
-            style={{ borderColor: "oklch(0.92 0.18 95 / 0.4)" }}
+            className="lg:hidden inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/15 text-white"
           >
             {open ? <X className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
@@ -150,13 +185,42 @@ function Navbar() {
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden border-t"
-          style={{ borderColor: "oklch(0.62 0.23 27 / 0.3)", background: "oklch(0.08 0.02 30 / 0.95)" }}
+          className="lg:hidden border-t border-white/10"
+          style={{ background: NAV_BG }}
         >
-          <div className="flex flex-col px-4 py-3 gap-1 text-sm uppercase tracking-widest font-semibold text-white/90">
-            <button onClick={() => scrollTo("hero")} className="text-left py-3 active:bg-white/5 rounded">Home</button>
-            <button onClick={() => scrollTo("menu")} className="text-left py-3 active:bg-white/5 rounded">Menu</button>
-            <button onClick={() => scrollTo("contact")} className="text-left py-3 active:bg-white/5 rounded">Contact</button>
+          <div className="flex flex-col px-5 py-3 gap-1 text-sm font-condensed font-bold uppercase tracking-[0.15em]">
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className="text-left py-3 active:bg-white/5 rounded"
+                style={{ color: active === item.id ? YELLOW : "rgba(255,255,255,0.9)" }}
+              >
+                {item.label}
+              </button>
+            ))}
+            <div className="flex items-center gap-2 pt-3 sm:hidden">
+              <button
+                onClick={() => setLang("SQ")}
+                className="px-3 py-1.5 rounded-full text-xs font-bold"
+                style={{
+                  background: lang === "SQ" ? YELLOW : "rgba(255,255,255,0.08)",
+                  color: lang === "SQ" ? "#000" : "#fff",
+                }}
+              >
+                SQ
+              </button>
+              <button
+                onClick={() => setLang("EN")}
+                className="px-3 py-1.5 rounded-full text-xs font-bold"
+                style={{
+                  background: lang === "EN" ? YELLOW : "rgba(255,255,255,0.08)",
+                  color: lang === "EN" ? "#000" : "#fff",
+                }}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </motion.nav>
       )}
@@ -170,202 +234,172 @@ function Hero() {
     document.getElementById("menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const tickerItems = [
+    "Hamburger i Freskët",
+    "Qebap Tradicional",
+    "Magic Burger",
+    "Tost i Nxehtë",
+    "Porosit: 070-488-300",
+    "Good Food · Pure Magic",
+  ];
+  const tickerLine = tickerItems.join("  🔥  ");
+
   return (
     <section
       id="hero"
-      className="relative h-screen min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 pt-16 pb-4 sm:pt-20 sm:pb-8"
+      className="relative w-full flex flex-col"
+      style={{ minHeight: "100vh", background: "#000" }}
     >
-      <div aria-hidden className="absolute inset-0" style={{ background: "var(--gradient-warm)" }} />
-      {/* Dark overlay for text readability */}
-      <div aria-hidden className="absolute inset-0 bg-black/40 sm:bg-black/30" />
-      <motion.div
+      {/* Background image */}
+      <div
         aria-hidden
-        className="absolute h-[900px] w-[900px] rounded-full opacity-50 blur-3xl"
+        className="absolute inset-0 bg-no-repeat"
+        style={{
+          backgroundImage: `url(${heroPoster})`,
+          backgroundSize: "cover",
+          backgroundPosition: "right top",
+        }}
+      />
+      {/* Gradient overlay */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
         style={{
           background:
-            "conic-gradient(from 0deg, oklch(0.62 0.23 27), oklch(0.92 0.18 95), oklch(0.75 0.19 55), oklch(0.62 0.23 27))",
+            "linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 45%, rgba(0,0,0,0.15) 100%)",
         }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Background watermark logo */}
-      <motion.img
-        aria-hidden
-        src={logoPng}
-        alt=""
-        className="absolute pointer-events-none select-none w-[min(110vw,900px)] h-auto opacity-25"
-        style={{ filter: "drop-shadow(0 0 80px oklch(0.92 0.18 95 / 0.7)) drop-shadow(0 0 40px oklch(0.62 0.23 27 / 0.6))" }}
-        animate={{ scale: [1, 1.04, 1], rotate: [0, 2, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {[...Array(20)].map((_, i) => (
-        <motion.span
-          key={i}
-          className="absolute h-1.5 w-1.5 rounded-full"
-          style={{
-            background: "var(--brand-yellow)",
-            top: `${5 + Math.random() * 90}%`,
-            left: `${5 + Math.random() * 90}%`,
-            boxShadow: "0 0 12px oklch(0.92 0.18 95)",
-          }}
-          animate={{ opacity: [0, 1, 0], scale: [0, 1.4, 0], y: [0, -40, 0] }}
-          transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3 }}
-        />
-      ))}
-
-      <motion.div
-        className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl px-2"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <motion.span
-          className="font-script text-4xl sm:text-5xl md:text-6xl mb-5 sm:mb-6 inline-flex items-baseline gap-3 px-5 py-2 rounded-full backdrop-blur-md border"
-          style={{
-            background: "oklch(0.08 0.02 30 / 0.55)",
-            borderColor: "oklch(0.92 0.18 95 / 0.5)",
-            boxShadow:
-              "0 8px 30px -8px oklch(0 0 0 / 0.7), inset 0 0 0 1px oklch(0.92 0.18 95 / 0.15), 0 0 40px oklch(0.92 0.18 95 / 0.25)",
-          }}
-          initial={{ opacity: 0, scale: 0.85, y: -10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span
-            style={{
-              color: "#ffd900",
-              textShadow:
-                "0 2px 0 #8a1010, 0 0 24px oklch(0.92 0.18 95 / 0.95), 0 0 48px oklch(0.92 0.18 95 / 0.6)",
-              WebkitTextStroke: "0.5px #8a1010",
-            }}
+      {/* Top badges row */}
+      <div className="relative z-10 w-full pt-20 sm:pt-24 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto flex items-start justify-between gap-3">
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-[11px] font-condensed font-bold uppercase tracking-[0.18em] text-white border border-white/15 backdrop-blur-md"
+            style={{ background: "rgba(0,0,0,0.55)" }}
           >
-            ✦ Magic
-          </span>
-          <span
-            className="font-display uppercase tracking-wider text-3xl sm:text-4xl md:text-5xl"
-            style={{
-              color: "#ff2a3a",
-              textShadow:
-                "0 2px 0 #5a0808, 0 0 24px oklch(0.62 0.23 27 / 0.95), 0 0 48px oklch(0.62 0.23 27 / 0.6)",
-              WebkitTextStroke: "0.5px #5a0808",
-            }}
+            <span>🔥</span>
+            <span>KUMANOVË · USHQIM I SHPEJTË</span>
+          </motion.span>
+
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-condensed font-bold uppercase tracking-[0.18em] text-white border border-white/15 backdrop-blur-md"
+            style={{ background: "rgba(0,0,0,0.55)" }}
           >
-            Food ✦
-          </span>
-        </motion.span>
+            <span style={{ color: YELLOW }}>★</span>
+            <span>I NXEHTË & I FRESKËT</span>
+          </motion.span>
+        </div>
+      </div>
 
-        <motion.h1
-          className="font-display text-3xl sm:text-6xl md:text-8xl uppercase leading-[1.1] tracking-tight font-black"
-          style={{
-            color: "#fffaf0",
-            textShadow:
-              "0 2px 0 #c41e1e, 0 4px 12px rgba(0,0,0,0.9), 0 0 40px oklch(0.62 0.23 27 / 0.8), 0 0 80px oklch(0.92 0.18 95 / 0.4)",
-            WebkitTextStroke: "1px #c41e1e",
-          }}
-        >
-          Ushqim Magjik,
-          <br />
-          <span
-            className="block mt-2"
-            style={{
-              color: "#ffd24a",
-              textShadow:
-                "0 2px 0 #8a1010, 0 4px 16px rgba(0,0,0,0.95), 0 0 40px oklch(0.92 0.18 95 / 0.7)",
-              WebkitTextStroke: "1px #8a1010",
-            }}
-          >
-            Shije e Paharrueshme
-          </span>
-        </motion.h1>
-
-        <motion.p
-          className="mt-5 sm:mt-6 text-base sm:text-xl md:text-2xl text-white max-w-xl leading-relaxed font-semibold px-2"
-          style={{ textShadow: "0 2px 12px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)" }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          Burgera të freskët, tosta të shijshme, sallata dhe pije —
-          të gjitha të përgatitura me dashuri në Kumanovë.
-        </motion.p>
-
+      {/* Main content */}
+      <div className="relative z-10 flex-1 flex items-center px-4 sm:px-8 py-10 sm:py-14">
         <motion.div
-          className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto px-2 sm:px-0"
-          initial={{ opacity: 0, y: 10 }}
+          className="max-w-7xl mx-auto w-full"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.button
-            type="button"
-            onClick={scrollToMenu}
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-8 py-4 text-base sm:text-lg font-bold text-white uppercase tracking-wider"
-            style={{
-              background: "var(--gradient-cta)",
-              boxShadow: "var(--shadow-cta)",
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            animate={{
-              boxShadow: [
-                "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
-                "0 25px 70px -10px oklch(0.62 0.23 27 / 0.95)",
-                "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
-              ],
-            }}
-            transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
-          >
-            🍔 Porosit Tani
-          </motion.button>
-
-          <a
-            href="#menu"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToMenu();
-            }}
-            className="w-full sm:w-auto text-center text-sm uppercase tracking-[0.3em] font-semibold px-6 py-3 rounded-full border transition hover:bg-white/5"
-            style={{
-              color: "var(--brand-yellow)",
-              borderColor: "oklch(0.92 0.18 95 / 0.4)",
-            }}
-          >
-            Shiko Menun
-          </a>
-        </motion.div>
-
-        <motion.div
-          className="mt-6 sm:mt-8 flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-3"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-        >
-          {[
-            { icon: "🔥", label: "E Freskët" },
-            { icon: "⚡", label: "E Shpejtë" },
-            { icon: "❤️", label: "Me Dashuri" },
-          ].map((f) => (
-            <span
-              key={f.label}
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white backdrop-blur-sm border"
+          <div className="max-w-2xl text-left">
+            <h1
+              className="font-condensed font-black uppercase leading-[0.92] tracking-tight"
               style={{
-                background: "oklch(0.08 0.02 30 / 0.55)",
-                borderColor: "oklch(0.92 0.18 95 / 0.45)",
-                boxShadow: "0 4px 14px -4px oklch(0 0 0 / 0.6), inset 0 0 0 1px oklch(0.92 0.18 95 / 0.1)",
+                fontSize: "clamp(60px, 10vw, 110px)",
+                color: "#fff",
+                textShadow: "0 4px 24px rgba(0,0,0,0.7)",
               }}
             >
-              <span
-                className="text-sm sm:text-base"
-                style={{ filter: "drop-shadow(0 0 6px oklch(0.92 0.18 95 / 0.8))" }}
-              >
-                {f.icon}
+              GOOD FOOD
+            </h1>
+            <h1
+              className="font-condensed font-black uppercase leading-[0.92] tracking-tight mt-1"
+              style={{ fontSize: "clamp(60px, 10vw, 110px)" }}
+            >
+              <span style={{ color: YELLOW, textShadow: "0 4px 24px rgba(0,0,0,0.6)" }}>
+                PURE
+              </span>{" "}
+              <span style={{ color: RED, textShadow: "0 4px 24px rgba(0,0,0,0.6)" }}>
+                MAGIC
               </span>
-              <span className="tracking-wide">{f.label}</span>
-            </span>
-          ))}
+            </h1>
+
+            {/* Red brush stroke */}
+            <div
+              className="mt-5"
+              style={{
+                width: "180px",
+                height: "3px",
+                background: RED,
+                boxShadow: "0 0 10px rgba(204,0,0,0.6)",
+              }}
+            />
+
+            <p
+              className="mt-5 text-white max-w-md leading-relaxed"
+              style={{ fontSize: "15px", opacity: 0.8 }}
+            >
+              I freskët. I lëngshëm. I shijshëm. Bërë posaçërisht për ty.
+            </p>
+
+            <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <motion.a
+                href={`tel:${PHONE_TEL}`}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[13px] sm:text-sm font-condensed font-black uppercase tracking-wider"
+                style={{
+                  background: YELLOW,
+                  color: "#000",
+                  boxShadow: "0 12px 30px -8px rgba(255,184,0,0.55)",
+                }}
+              >
+                <Phone className="h-4 w-4" />
+                <span>Porosit · {PHONE_NUMBER}</span>
+              </motion.a>
+
+              <motion.button
+                type="button"
+                onClick={scrollToMenu}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[13px] sm:text-sm font-condensed font-black uppercase tracking-wider text-white border-2 border-white/30 backdrop-blur-sm"
+                style={{ background: "rgba(0,0,0,0.35)" }}
+              >
+                <span>Shiko Menunë</span>
+                <span>→</span>
+              </motion.button>
+            </div>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
+
+      {/* Ticker */}
+      <div
+        className="relative z-10 w-full overflow-hidden border-t border-white/5"
+        style={{ background: "#111", height: "48px" }}
+      >
+        <div className="flex h-full items-center whitespace-nowrap animate-ticker">
+          {[0, 1].map((k) => (
+            <div
+              key={k}
+              className="flex shrink-0 items-center font-condensed font-bold uppercase text-white"
+              style={{
+                fontSize: "13px",
+                letterSpacing: "2px",
+                paddingRight: "3rem",
+              }}
+            >
+              {tickerLine}
+              <span className="px-6">🔥</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -508,14 +542,6 @@ function CTASection() {
           style={{ background: "var(--gradient-cta)", boxShadow: "var(--shadow-cta)" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
-          animate={{
-            boxShadow: [
-              "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
-              "0 25px 70px -10px oklch(0.62 0.23 27 / 0.95)",
-              "0 20px 50px -10px oklch(0.62 0.23 27 / 0.7)",
-            ],
-          }}
-          transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
         >
           <Phone className="h-5 w-5" />
           <span className="tracking-wider uppercase">Telefono</span>
