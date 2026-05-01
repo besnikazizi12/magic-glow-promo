@@ -8,55 +8,57 @@ import tost from "@/assets/food-tost.jpg";
 import salad from "@/assets/food-salad.jpg";
 import drinks from "@/assets/food-drinks.jpg";
 
+type Lang = "SQ" | "EN";
+
 const MENU = [
   {
-    category: "Hamburger",
+    category: { SQ: "Hamburger", EN: "Burgers" },
     image: burger,
     items: [
-      { name: "Hamburger", price: "140" },
-      { name: "Cheeseburger", price: "170" },
-      { name: "Hamburger shtëpie", desc: "(veze, kashkavall, djathë)", price: "200" },
-      { name: "Magic Burger", desc: "(proshut & kashkavall)", price: "220" },
-      { name: "Suxhuk Burger", price: "140" },
-      { name: "Qebap", price: "250/270" },
-      { name: "Qofte shtëpie", price: "270" },
-      { name: "Pljeskavic Sharri", price: "270" },
-      { name: "File Pule", price: "170" },
-      { name: "File Pule Porcion", price: "190/300" },
-      { name: "Hamburger Porcion", price: "160" },
+      { name: { SQ: "Hamburger", EN: "Hamburger" }, price: "140" },
+      { name: { SQ: "Cheeseburger", EN: "Cheeseburger" }, price: "170" },
+      { name: { SQ: "Hamburger shtëpie", EN: "Homemade Burger" }, desc: { SQ: "(veze, kashkavall, djathë)", EN: "(egg, kashkaval, cheese)" }, price: "200" },
+      { name: { SQ: "Magic Burger", EN: "Magic Burger" }, desc: { SQ: "(proshut & kashkavall)", EN: "(ham & kashkaval)" }, price: "220" },
+      { name: { SQ: "Suxhuk Burger", EN: "Sujuk Burger" }, price: "140" },
+      { name: { SQ: "Qebap", EN: "Kebab" }, price: "250/270" },
+      { name: { SQ: "Qofte shtëpie", EN: "Homemade Meatballs" }, price: "270" },
+      { name: { SQ: "Pljeskavic Sharri", EN: "Pljeskavica Sharri" }, price: "270" },
+      { name: { SQ: "File Pule", EN: "Chicken Fillet" }, price: "170" },
+      { name: { SQ: "File Pule Porcion", EN: "Chicken Fillet Plate" }, price: "190/300" },
+      { name: { SQ: "Hamburger Porcion", EN: "Burger Plate" }, price: "160" },
     ],
   },
   {
-    category: "Tost",
+    category: { SQ: "Tost", EN: "Toast" },
     image: tost,
     items: [
-      { name: "Tost", desc: "(sallam, pule, kashkavall)", price: "100" },
-      { name: "Tost Përshut", desc: "(kashkavall)", price: "150" },
+      { name: { SQ: "Tost", EN: "Toast" }, desc: { SQ: "(sallam, pule, kashkavall)", EN: "(salami, chicken, kashkaval)" }, price: "100" },
+      { name: { SQ: "Tost Përshut", EN: "Ham Toast" }, desc: { SQ: "(kashkavall)", EN: "(kashkaval)" }, price: "150" },
     ],
   },
   {
-    category: "Sallata",
+    category: { SQ: "Sallata", EN: "Salads" },
     image: salad,
     items: [
-      { name: "Sallat Shope", price: "120" },
-      { name: "Sallat e përzier", price: "120" },
+      { name: { SQ: "Sallat Shope", EN: "Shopska Salad" }, price: "120" },
+      { name: { SQ: "Sallat e përzier", EN: "Mixed Salad" }, price: "120" },
     ],
   },
   {
-    category: "Pije",
+    category: { SQ: "Pije", EN: "Drinks" },
     image: drinks,
     items: [
-      { name: "Coca Cola", price: "60/70" },
-      { name: "Fanta", price: "60/70" },
-      { name: "Fanta Tropikal", price: "60/70" },
-      { name: "Sprite", price: "60/70" },
-      { name: "Schweppes", price: "60/70" },
-      { name: "Ujë", price: "70" },
-      { name: "Ujë me gaze", price: "50" },
-      { name: "Ujë Mineral", price: "40/50" },
-      { name: "Pepsi", price: "70" },
-      { name: "Gazoz", price: "70" },
-      { name: "Golden Eagle", price: "70" },
+      { name: { SQ: "Coca Cola", EN: "Coca Cola" }, price: "60/70" },
+      { name: { SQ: "Fanta", EN: "Fanta" }, price: "60/70" },
+      { name: { SQ: "Fanta Tropikal", EN: "Fanta Tropical" }, price: "60/70" },
+      { name: { SQ: "Sprite", EN: "Sprite" }, price: "60/70" },
+      { name: { SQ: "Schweppes", EN: "Schweppes" }, price: "60/70" },
+      { name: { SQ: "Ujë", EN: "Water" }, price: "70" },
+      { name: { SQ: "Ujë me gaze", EN: "Sparkling Water" }, price: "50" },
+      { name: { SQ: "Ujë Mineral", EN: "Mineral Water" }, price: "40/50" },
+      { name: { SQ: "Pepsi", EN: "Pepsi" }, price: "70" },
+      { name: { SQ: "Gazoz", EN: "Gazoz" }, price: "70" },
+      { name: { SQ: "Golden Eagle", EN: "Golden Eagle" }, price: "70" },
     ],
   },
 ];
@@ -68,25 +70,41 @@ const YELLOW = "#FFB800";
 const RED = "#CC0000";
 const NAV_BG = "#0a0a0a";
 
-const NAV_ITEMS = [
-  { id: "hero", label: "Kreu" },
-  { id: "menu", label: "Menuja" },
-  { id: "galeria", label: "Galeria" },
-  { id: "rreth", label: "Rreth Nesh" },
-  { id: "contact", label: "Kontakt" },
-];
+const T = {
+  navMenu: { SQ: "Menuja", EN: "Menu" },
+  navContact: { SQ: "Kontakt", EN: "Contact" },
+  heroLine1: { SQ: "GOOD FOOD", EN: "GOOD FOOD" },
+  heroLine2a: { SQ: "PURE", EN: "PURE" },
+  heroLine2b: { SQ: "MAGIC", EN: "MAGIC" },
+  heroSub: {
+    SQ: "I freskët. I lëngshëm. I shijshëm. Bërë posaçërisht për ty.",
+    EN: "Fresh. Juicy. Delicious. Made just for you.",
+  },
+  orderNow: { SQ: "Porosit tani", EN: "Order now" },
+  seeMenu: { SQ: "Shiko menunë", EN: "See menu" },
+  topBadge: { SQ: "KUMANOVË · USHQIM I SHPEJTË", EN: "KUMANOVË · FAST FOOD" },
+  topBadge2: { SQ: "I NXEHTË & I FRESKËT", EN: "HOT & FRESH" },
+  menuKicker: { SQ: "Shijet tona", EN: "Our Delicious" },
+  menuTitle: { SQ: "Menuja", EN: "Menu" },
+  hungry: { SQ: "I uritur?", EN: "Hungry?" },
+  orderHeading: { SQ: "Porosit Tani", EN: "Order Now" },
+  call: { SQ: "Telefono", EN: "Call" },
+  open: { SQ: "Hapur 08:00 — 24:00", EN: "Open 08:00 — 24:00" },
+} as const;
 
 /* ---------------- NAVBAR ---------------- */
-function Navbar() {
+function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("hero");
-  const [lang, setLang] = useState<"SQ" | "EN">("SQ");
 
   const scrollTo = (id: string) => {
     setOpen(false);
-    setActive(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  const navItems = [
+    { id: "menu", label: T.navMenu[lang] },
+    { id: "contact", label: T.navContact[lang] },
+  ];
 
   return (
     <header
@@ -105,33 +123,28 @@ function Navbar() {
             alt="Magic Food"
             className="h-10 w-10 rounded-full object-contain"
           />
-          <div
-            className="font-condensed font-black text-lg sm:text-xl uppercase tracking-wider leading-none flex gap-1"
-          >
+          <div className="font-condensed font-black text-lg sm:text-xl uppercase tracking-wider leading-none flex gap-1">
             <span className="text-white">MAGIC</span>
             <span style={{ color: YELLOW }}>FOOD</span>
           </div>
         </button>
 
         {/* Desktop nav links */}
-        <nav className="hidden lg:flex items-center gap-7 text-[13px] font-condensed font-bold uppercase tracking-[0.15em]">
-          {NAV_ITEMS.map((item) => (
+        <nav className="hidden lg:flex items-center gap-8 text-[13px] font-condensed font-bold uppercase tracking-[0.18em]">
+          {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="transition-colors"
-              style={{
-                color: active === item.id ? YELLOW : "rgba(255,255,255,0.85)",
-              }}
+              className="text-white/85 hover:text-[color:var(--accent-yellow)] transition-colors"
+              style={{ ["--accent-yellow" as string]: YELLOW }}
             >
               {item.label}
             </button>
           ))}
         </nav>
 
-        {/* Right side: lang switcher + call */}
+        {/* Right */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {/* Lang switcher */}
           <div className="hidden sm:flex items-center rounded-full p-1 bg-white/5 border border-white/10 text-[11px] font-condensed font-bold tracking-wider">
             <button
               onClick={() => setLang("SQ")}
@@ -156,7 +169,6 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Call pill */}
           <a
             href={`tel:${PHONE_TEL}`}
             className="inline-flex items-center gap-2 rounded-full px-3 sm:px-4 py-2 text-white text-[12px] sm:text-[13px] font-condensed font-black uppercase tracking-wider"
@@ -169,7 +181,6 @@ function Navbar() {
             <span>{PHONE_NUMBER}</span>
           </a>
 
-          {/* Mobile burger */}
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
@@ -180,7 +191,6 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile dropdown */}
       {open && (
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
@@ -188,13 +198,12 @@ function Navbar() {
           className="lg:hidden border-t border-white/10"
           style={{ background: NAV_BG }}
         >
-          <div className="flex flex-col px-5 py-3 gap-1 text-sm font-condensed font-bold uppercase tracking-[0.15em]">
-            {NAV_ITEMS.map((item) => (
+          <div className="flex flex-col px-5 py-3 gap-1 text-sm font-condensed font-bold uppercase tracking-[0.18em]">
+            {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className="text-left py-3 active:bg-white/5 rounded"
-                style={{ color: active === item.id ? YELLOW : "rgba(255,255,255,0.9)" }}
+                className="text-left py-3 text-white/90 active:bg-white/5 rounded"
               >
                 {item.label}
               </button>
@@ -229,19 +238,29 @@ function Navbar() {
 }
 
 /* ---------------- HERO ---------------- */
-function Hero() {
+function Hero({ lang }: { lang: Lang }) {
   const scrollToMenu = () => {
     document.getElementById("menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const tickerItems = [
-    "Hamburger i Freskët",
-    "Qebap Tradicional",
-    "Magic Burger",
-    "Tost i Nxehtë",
-    "Porosit: 070-488-300",
-    "Good Food · Pure Magic",
-  ];
+  const tickerItems =
+    lang === "SQ"
+      ? [
+          "Hamburger i Freskët",
+          "Qebap Tradicional",
+          "Magic Burger",
+          "Tost i Nxehtë",
+          "Porosit: 070-488-300",
+          "Good Food · Pure Magic",
+        ]
+      : [
+          "Fresh Burgers",
+          "Traditional Kebab",
+          "Magic Burger",
+          "Hot Toast",
+          "Order: 070-488-300",
+          "Good Food · Pure Magic",
+        ];
   const tickerLine = tickerItems.join("  🔥  ");
 
   return (
@@ -250,49 +269,47 @@ function Hero() {
       className="relative w-full flex flex-col"
       style={{ minHeight: "100vh", background: "#000" }}
     >
-      {/* Background image */}
       <div
         aria-hidden
         className="absolute inset-0 bg-no-repeat"
         style={{
           backgroundImage: `url(${heroPoster})`,
           backgroundSize: "cover",
-          backgroundPosition: "right top",
+          backgroundPosition: "right center",
         }}
       />
-      {/* Gradient overlay */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 45%, rgba(0,0,0,0.15) 100%)",
+            "linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.1) 100%)",
         }}
       />
 
-      {/* Top badges row */}
+      {/* Top badges */}
       <div className="relative z-10 w-full pt-20 sm:pt-24 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex items-start justify-between gap-3">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-[11px] font-condensed font-bold uppercase tracking-[0.18em] text-white border border-white/15 backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-[11px] font-condensed font-bold uppercase tracking-[0.2em] text-white border border-white/15 backdrop-blur-md"
             style={{ background: "rgba(0,0,0,0.55)" }}
           >
             <span>🔥</span>
-            <span>KUMANOVË · USHQIM I SHPEJTË</span>
+            <span>{T.topBadge[lang]}</span>
           </motion.span>
 
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-condensed font-bold uppercase tracking-[0.18em] text-white border border-white/15 backdrop-blur-md"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-condensed font-bold uppercase tracking-[0.2em] text-white border border-white/15 backdrop-blur-md"
             style={{ background: "rgba(0,0,0,0.55)" }}
           >
             <span style={{ color: YELLOW }}>★</span>
-            <span>I NXEHTË & I FRESKËT</span>
+            <span>{T.topBadge2[lang]}</span>
           </motion.span>
         </div>
       </div>
@@ -306,74 +323,107 @@ function Hero() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="max-w-2xl text-left">
-            <h1
-              className="font-condensed font-black uppercase leading-[0.92] tracking-tight"
+            <motion.h1
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="font-condensed font-black uppercase leading-[0.88] tracking-tight"
               style={{
-                fontSize: "clamp(60px, 10vw, 110px)",
+                fontSize: "clamp(64px, 11vw, 124px)",
                 color: "#fff",
-                textShadow: "0 4px 24px rgba(0,0,0,0.7)",
+                textShadow: "0 6px 30px rgba(0,0,0,0.85), 0 2px 4px rgba(0,0,0,0.5)",
+                WebkitTextStroke: "0.5px rgba(255,255,255,0.1)",
               }}
             >
-              GOOD FOOD
-            </h1>
-            <h1
-              className="font-condensed font-black uppercase leading-[0.92] tracking-tight mt-1"
-              style={{ fontSize: "clamp(60px, 10vw, 110px)" }}
+              {T.heroLine1[lang]}
+            </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="font-condensed font-black uppercase leading-[0.88] tracking-tight mt-1"
+              style={{ fontSize: "clamp(64px, 11vw, 124px)" }}
             >
-              <span style={{ color: YELLOW, textShadow: "0 4px 24px rgba(0,0,0,0.6)" }}>
-                PURE
+              <span
+                style={{
+                  color: YELLOW,
+                  textShadow:
+                    "0 6px 30px rgba(0,0,0,0.85), 0 0 24px rgba(255,184,0,0.45)",
+                }}
+              >
+                {T.heroLine2a[lang]}
               </span>{" "}
-              <span style={{ color: RED, textShadow: "0 4px 24px rgba(0,0,0,0.6)" }}>
-                MAGIC
+              <span
+                style={{
+                  color: RED,
+                  textShadow:
+                    "0 6px 30px rgba(0,0,0,0.85), 0 0 28px rgba(204,0,0,0.55)",
+                }}
+              >
+                {T.heroLine2b[lang]}
               </span>
-            </h1>
+            </motion.h1>
 
-            {/* Red brush stroke */}
-            <div
-              className="mt-5"
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.7, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 origin-left"
               style={{
-                width: "180px",
-                height: "3px",
-                background: RED,
-                boxShadow: "0 0 10px rgba(204,0,0,0.6)",
+                width: "200px",
+                height: "4px",
+                background: `linear-gradient(90deg, ${RED}, ${YELLOW})`,
+                borderRadius: "2px",
+                boxShadow: "0 0 14px rgba(204,0,0,0.55)",
               }}
             />
 
-            <p
-              className="mt-5 text-white max-w-md leading-relaxed"
-              style={{ fontSize: "15px", opacity: 0.8 }}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="mt-6 text-white/80 max-w-md leading-relaxed font-body"
+              style={{ fontSize: "16px", letterSpacing: "0.01em" }}
             >
-              I freskët. I lëngshëm. I shijshëm. Bërë posaçërisht për ty.
-            </p>
+              {T.heroSub[lang]}
+            </motion.p>
 
-            <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+            >
               <motion.a
                 href={`tel:${PHONE_TEL}`}
-                whileHover={{ scale: 1.04 }}
+                whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[13px] sm:text-sm font-condensed font-black uppercase tracking-wider"
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-[13px] sm:text-sm font-condensed font-black uppercase tracking-[0.15em]"
                 style={{
                   background: YELLOW,
-                  color: "#000",
-                  boxShadow: "0 12px 30px -8px rgba(255,184,0,0.55)",
+                  color: "#0a0a0a",
+                  boxShadow:
+                    "0 14px 34px -10px rgba(255,184,0,0.65), inset 0 1px 0 rgba(255,255,255,0.4)",
                 }}
               >
                 <Phone className="h-4 w-4" />
-                <span>Porosit · {PHONE_NUMBER}</span>
+                <span>{T.orderNow[lang]}</span>
               </motion.a>
 
               <motion.button
                 type="button"
                 onClick={scrollToMenu}
-                whileHover={{ scale: 1.04 }}
+                whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[13px] sm:text-sm font-condensed font-black uppercase tracking-wider text-white border-2 border-white/30 backdrop-blur-sm"
-                style={{ background: "rgba(0,0,0,0.35)" }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[13px] sm:text-sm font-condensed font-black uppercase tracking-[0.15em] text-white border border-white/25 backdrop-blur-md transition-colors hover:bg-white/10"
+                style={{ background: "rgba(255,255,255,0.06)" }}
               >
-                <span>Shiko Menunë</span>
-                <span>→</span>
+                <span>{T.seeMenu[lang]}</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </motion.button>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
@@ -405,7 +455,15 @@ function Hero() {
 }
 
 /* ---------------- MENU ---------------- */
-function MenuCategory({ category, index }: { category: (typeof MENU)[number]; index: number }) {
+function MenuCategory({
+  category,
+  index,
+  lang,
+}: {
+  category: (typeof MENU)[number];
+  index: number;
+  lang: Lang;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -422,7 +480,7 @@ function MenuCategory({ category, index }: { category: (typeof MENU)[number]; in
       <div className="flex items-center gap-3 mb-4">
         <img
           src={category.image}
-          alt={category.category}
+          alt={category.category[lang]}
           loading="lazy"
           className="h-12 w-12 sm:h-14 sm:w-14 rounded-full object-cover shrink-0"
           style={{ boxShadow: "0 0 0 2px oklch(0.75 0.19 55), 0 0 20px oklch(0.62 0.23 27 / 0.5)" }}
@@ -435,17 +493,17 @@ function MenuCategory({ category, index }: { category: (typeof MENU)[number]; in
             boxShadow: "0 4px 12px -2px oklch(0.62 0.23 27 / 0.5)",
           }}
         >
-          {category.category}
+          {category.category[lang]}
         </h3>
       </div>
 
       <ul className="space-y-2">
         {category.items.map((item) => (
-          <li key={item.name} className="flex items-baseline gap-2 text-sm sm:text-base">
+          <li key={item.name.SQ} className="flex items-baseline gap-2 text-sm sm:text-base">
             <div className="flex-1 min-w-0">
-              <span className="text-white/95 font-medium">{item.name}</span>
+              <span className="text-white/95 font-medium">{item.name[lang]}</span>
               {"desc" in item && item.desc && (
-                <span className="block text-[11px] text-white/55 italic">{item.desc}</span>
+                <span className="block text-[11px] text-white/55 italic">{item.desc[lang]}</span>
               )}
             </div>
             <span
@@ -466,7 +524,7 @@ function MenuCategory({ category, index }: { category: (typeof MENU)[number]; in
   );
 }
 
-function MenuSection() {
+function MenuSection({ lang }: { lang: Lang }) {
   return (
     <section
       id="menu"
@@ -484,7 +542,7 @@ function MenuSection() {
         transition={{ duration: 0.7 }}
       >
         <p className="font-script text-xl sm:text-2xl mb-1" style={{ color: "var(--brand-orange)" }}>
-          Our Delicious
+          {T.menuKicker[lang]}
         </p>
         <h2
           className="font-display text-4xl sm:text-7xl tracking-[0.15em] uppercase leading-none"
@@ -497,14 +555,14 @@ function MenuSection() {
             filter: "drop-shadow(0 4px 20px oklch(0.62 0.23 27 / 0.5))",
           }}
         >
-          Menu
+          {T.menuTitle[lang]}
         </h2>
         <div className="mx-auto mt-3 h-[2px] w-20" style={{ background: "var(--gradient-gold)" }} />
       </motion.div>
 
       <div className="max-w-3xl mx-auto grid grid-cols-1 gap-4 sm:gap-6">
         {MENU.map((cat, i) => (
-          <MenuCategory key={cat.category} category={cat} index={i} />
+          <MenuCategory key={cat.category.SQ} category={cat} index={i} lang={lang} />
         ))}
       </div>
     </section>
@@ -512,7 +570,7 @@ function MenuSection() {
 }
 
 /* ---------------- CTA / CONTACT ---------------- */
-function CTASection() {
+function CTASection({ lang }: { lang: Lang }) {
   return (
     <section
       id="contact"
@@ -530,10 +588,10 @@ function CTASection() {
         transition={{ duration: 0.7 }}
       >
         <p className="font-script text-2xl sm:text-3xl" style={{ color: "var(--brand-yellow)" }}>
-          I uritur?
+          {T.hungry[lang]}
         </p>
         <h2 className="font-display text-3xl sm:text-5xl tracking-[0.15em] uppercase text-white leading-tight">
-          Porosit Tani
+          {T.orderHeading[lang]}
         </h2>
 
         <motion.a
@@ -544,7 +602,7 @@ function CTASection() {
           whileTap={{ scale: 0.97 }}
         >
           <Phone className="h-5 w-5" />
-          <span className="tracking-wider uppercase">Telefono</span>
+          <span className="tracking-wider uppercase">{T.call[lang]}</span>
         </motion.a>
 
         <a
@@ -561,7 +619,7 @@ function CTASection() {
         </div>
 
         <div className="flex items-center gap-2 mt-2 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-white/70">
-          <span>⏰ Hapur 08:00 — 24:00</span>
+          <span>⏰ {T.open[lang]}</span>
         </div>
       </motion.div>
     </section>
@@ -569,12 +627,13 @@ function CTASection() {
 }
 
 export function MagicFoodPromo() {
+  const [lang, setLang] = useState<Lang>("SQ");
   return (
     <main className="font-body bg-background text-foreground">
-      <Navbar />
-      <Hero />
-      <MenuSection />
-      <CTASection />
+      <Navbar lang={lang} setLang={setLang} />
+      <Hero lang={lang} />
+      <MenuSection lang={lang} />
+      <CTASection lang={lang} />
     </main>
   );
 }
