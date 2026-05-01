@@ -125,9 +125,10 @@
   --color-brand-red-deep: var(--brand-red-deep);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
-  --font-display: "Anton", "Impact", sans-serif;
+  --font-display: "Barlow Condensed", "Anton", "Impact", sans-serif;
   --font-script: "Pacifico", cursive;
-  --font-body: "Poppins", system-ui, sans-serif;
+  --font-body: "Barlow", "Poppins", system-ui, sans-serif;
+  --font-condensed: "Barlow Condensed", "Impact", sans-serif;
   --animate-shimmer: shimmer 3s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-spin-slow: spin 20s linear infinite;
@@ -150,6 +151,11 @@
   0%, 100% { opacity: 0; transform: scale(0); }
   50% { opacity: 1; transform: scale(1); }
 }
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker { animation: ticker-scroll 30s linear infinite; }
 
 .dark {
   --background: oklch(0.129 0.042 264.695);
