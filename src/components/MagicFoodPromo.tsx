@@ -73,9 +73,9 @@ const NAV_BG = "#0a0a0a";
 const T = {
   navMenu: { SQ: "Menuja", EN: "Menu" },
   navContact: { SQ: "Kontakt", EN: "Contact" },
-  heroLine1: { SQ: "GOOD FOOD", EN: "GOOD FOOD" },
-  heroLine2a: { SQ: "PURE", EN: "PURE" },
-  heroLine2b: { SQ: "MAGIC", EN: "MAGIC" },
+  heroLine1: { SQ: "MAGIC", EN: "MAGIC" },
+  heroLine2a: { SQ: "FOOD", EN: "FOOD" },
+  heroLine2b: { SQ: "", EN: "" },
   heroSub: {
     SQ: "I freskët. I lëngshëm. I shijshëm. Bërë posaçërisht për ty.",
     EN: "Fresh. Juicy. Delicious. Made just for you.",
@@ -330,9 +330,9 @@ function Hero({ lang }: { lang: Lang }) {
               className="font-condensed font-black uppercase leading-[0.88] tracking-tight"
               style={{
                 fontSize: "clamp(64px, 11vw, 124px)",
-                color: "#fff",
-                textShadow: "0 6px 30px rgba(0,0,0,0.85), 0 2px 4px rgba(0,0,0,0.5)",
-                WebkitTextStroke: "0.5px rgba(255,255,255,0.1)",
+                color: YELLOW,
+                textShadow:
+                  "0 6px 30px rgba(0,0,0,0.85), 0 0 28px rgba(255,184,0,0.5)",
               }}
             >
               {T.heroLine1[lang]}
@@ -342,26 +342,14 @@ function Hero({ lang }: { lang: Lang }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="font-condensed font-black uppercase leading-[0.88] tracking-tight mt-1"
-              style={{ fontSize: "clamp(64px, 11vw, 124px)" }}
+              style={{
+                fontSize: "clamp(64px, 11vw, 124px)",
+                color: RED,
+                textShadow:
+                  "0 6px 30px rgba(0,0,0,0.85), 0 0 28px rgba(204,0,0,0.55)",
+              }}
             >
-              <span
-                style={{
-                  color: YELLOW,
-                  textShadow:
-                    "0 6px 30px rgba(0,0,0,0.85), 0 0 24px rgba(255,184,0,0.45)",
-                }}
-              >
-                {T.heroLine2a[lang]}
-              </span>{" "}
-              <span
-                style={{
-                  color: RED,
-                  textShadow:
-                    "0 6px 30px rgba(0,0,0,0.85), 0 0 28px rgba(204,0,0,0.55)",
-                }}
-              >
-                {T.heroLine2b[lang]}
-              </span>
+              {T.heroLine2a[lang]}
             </motion.h1>
 
             <motion.div
@@ -382,8 +370,13 @@ function Hero({ lang }: { lang: Lang }) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-6 text-white/80 max-w-md leading-relaxed font-body"
-              style={{ fontSize: "16px", letterSpacing: "0.01em" }}
+              className="mt-6 text-white max-w-md font-body font-semibold"
+              style={{
+                fontSize: "18px",
+                lineHeight: 1.5,
+                letterSpacing: "0.015em",
+                textShadow: "0 2px 14px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.6)",
+              }}
             >
               {T.heroSub[lang]}
             </motion.p>
