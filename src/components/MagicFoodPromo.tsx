@@ -232,25 +232,34 @@ function Hero({ lang }: { lang: Lang }) {
     document.getElementById("menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const tickerItems =
-    lang === "SQ"
-      ? [
-          "Hamburger i Freskët",
-          "Qebap Tradicional",
-          "Magic Burger",
-          "Tost i Nxehtë",
-          "Porosit: 070-488-300",
-          "Good Food · Pure Magic",
-        ]
-      : [
-          "Fresh Burgers",
-          "Traditional Kebab",
-          "Magic Burger",
-          "Hot Toast",
-          "Order: 070-488-300",
-          "Good Food · Pure Magic",
-        ];
-  const tickerLine = tickerItems.join("  🔥  ");
+  const tickerMap: Record<Lang, string[]> = {
+    SQ: [
+      "Hamburger i Freskët",
+      "Qebap Tradicional",
+      "Magic Burger",
+      "Tost i Nxehtë",
+      "Porosit: 070-488-300",
+      "Good Food · Pure Magic",
+    ],
+    EN: [
+      "Fresh Burgers",
+      "Traditional Kebab",
+      "Magic Burger",
+      "Hot Toast",
+      "Order: 070-488-300",
+      "Good Food · Pure Magic",
+    ],
+    MK: [
+      "Свежи хамбургери",
+      "Традиционален ќебап",
+      "Меџик Бургер",
+      "Топол тост",
+      "Нарачај: 070-488-300",
+      "Good Food · Pure Magic",
+    ],
+  };
+  const tickerLine = tickerMap[lang].join("  🔥  ");
+
 
   return (
     <section
