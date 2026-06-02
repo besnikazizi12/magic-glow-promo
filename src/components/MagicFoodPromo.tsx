@@ -146,28 +146,23 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
         {/* Right */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="hidden sm:flex items-center rounded-full p-1 bg-white/5 border border-white/10 text-[11px] font-condensed font-bold tracking-wider">
-            <button
-              onClick={() => setLang("SQ")}
-              className="px-2.5 py-1 rounded-full transition"
-              style={{
-                background: lang === "SQ" ? YELLOW : "transparent",
-                color: lang === "SQ" ? "#000" : "rgba(255,255,255,0.7)",
-              }}
-            >
-              SQ
-            </button>
-            <span className="px-1 text-white/30">|</span>
-            <button
-              onClick={() => setLang("EN")}
-              className="px-2.5 py-1 rounded-full transition"
-              style={{
-                background: lang === "EN" ? YELLOW : "transparent",
-                color: lang === "EN" ? "#000" : "rgba(255,255,255,0.7)",
-              }}
-            >
-              EN
-            </button>
+            {(["SQ", "EN", "MK"] as const).map((code, i) => (
+              <span key={code} className="flex items-center">
+                {i > 0 && <span className="px-1 text-white/30">|</span>}
+                <button
+                  onClick={() => setLang(code)}
+                  className="px-2.5 py-1 rounded-full transition"
+                  style={{
+                    background: lang === code ? YELLOW : "transparent",
+                    color: lang === code ? "#000" : "rgba(255,255,255,0.7)",
+                  }}
+                >
+                  {code}
+                </button>
+              </span>
+            ))}
           </div>
+
 
           <a
             href={`tel:${PHONE_TEL}`}
