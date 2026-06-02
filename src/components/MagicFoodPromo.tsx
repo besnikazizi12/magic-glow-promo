@@ -204,27 +204,21 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
               </button>
             ))}
             <div className="flex items-center gap-2 pt-3 sm:hidden">
-              <button
-                onClick={() => setLang("SQ")}
-                className="px-3 py-1.5 rounded-full text-xs font-bold"
-                style={{
-                  background: lang === "SQ" ? YELLOW : "rgba(255,255,255,0.08)",
-                  color: lang === "SQ" ? "#000" : "#fff",
-                }}
-              >
-                SQ
-              </button>
-              <button
-                onClick={() => setLang("EN")}
-                className="px-3 py-1.5 rounded-full text-xs font-bold"
-                style={{
-                  background: lang === "EN" ? YELLOW : "rgba(255,255,255,0.08)",
-                  color: lang === "EN" ? "#000" : "#fff",
-                }}
-              >
-                EN
-              </button>
+              {(["SQ", "EN", "MK"] as const).map((code) => (
+                <button
+                  key={code}
+                  onClick={() => setLang(code)}
+                  className="px-3 py-1.5 rounded-full text-xs font-bold"
+                  style={{
+                    background: lang === code ? YELLOW : "rgba(255,255,255,0.08)",
+                    color: lang === code ? "#000" : "#fff",
+                  }}
+                >
+                  {code}
+                </button>
+              ))}
             </div>
+
           </div>
         </motion.nav>
       )}
