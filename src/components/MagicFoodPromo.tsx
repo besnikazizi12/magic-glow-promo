@@ -625,6 +625,9 @@ export function MagicFoodPromo() {
       <Hero lang={lang} />
       <MenuSection lang={lang} />
       <CTASection lang={lang} />
+      <footer className="w-full py-4 text-center" style={{ background: "#0a0a0a" }}>
+        <p className="text-white/60 text-[10px] uppercase tracking-widest">Created by B.A</p>
+      </footer>
     </main>
   );
 }
