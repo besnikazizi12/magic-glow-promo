@@ -76,9 +76,9 @@ const T = {
   heroLine2a: { SQ: "FOOD", EN: "FOOD", MK: "FOOD" },
   heroLine2b: { SQ: "", EN: "", MK: "" },
   heroSub: {
-    SQ: "I freskët. I lëngshëm. I shijshëm. Bërë posaçërisht për ty.",
-    EN: "Fresh. Juicy. Delicious. Made just for you.",
-    MK: "Свежо. Сочно. Вкусно. Направено посебно за тебе.",
+    SQ: "I freskët.I shijshëm. Bërë posaçërisht për ty.",
+    EN: "Fresh. Delicious. Made just for you.",
+    MK: "Свежо. Вкусно. Направено посебно за тебе.",
   },
   orderNow: { SQ: "Porosit tani", EN: "Order now", MK: "Нарачај сега" },
   seeMenu: { SQ: "Shiko menunë", EN: "See menu", MK: "Види мени" },
