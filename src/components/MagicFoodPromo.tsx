@@ -58,6 +58,11 @@ const MENU = [
       { name: { SQ: "Pepsi", EN: "Pepsi", MK: "Пепси" }, price: "70" },
       { name: { SQ: "Gazoz", EN: "Gazoz", MK: "Газоз" }, price: "70" },
       { name: { SQ: "Golden Eagle", EN: "Golden Eagle", MK: "Golden Eagle" }, price: "70" },
+      { name: { SQ: "Leng Luleshtrydhe", EN: "Strawberry Juice", MK: "Сок од јагода" }, price: "70" },
+      { name: { SQ: "Leng Portokalli", EN: "Orange Juice", MK: "Сок од портокал" }, price: "70" },
+      { name: { SQ: "Leng Boronice", EN: "Blueberry Juice", MK: "Сок од боровинка" }, price: "70" },
+      { name: { SQ: "Leng Multivitamin", EN: "Multivitamin Juice", MK: "Сок од мултивитамин" }, price: "70" },
+      { name: { SQ: "Ajran", EN: "Ayran", MK: "Ајран" }, price: "30" },
     ],
   },
 ];
@@ -626,7 +631,7 @@ export function MagicFoodPromo() {
       <MenuSection lang={lang} />
       <CTASection lang={lang} />
       <footer className="w-full py-4 text-center" style={{ background: "#0a0a0a" }}>
-        <p className="text-white/60 text-[10px] uppercase tracking-widest">Created by B.A</p>
+        <p className="text-white/60 text-[10px] uppercase tracking-widest">Created by Besnik.Az</p>
       </footer>
     </main>
   );
