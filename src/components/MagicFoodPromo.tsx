@@ -20,7 +20,7 @@ const MENU = [
       { name: { SQ: "Hamburger shtëpie", EN: "Homemade Burger", MK: "Домашен бургер" }, desc: { SQ: "(veze, kashkavall, djathë)", EN: "(egg, kashkaval, cheese)", MK: "(јајце, кашкавал, сирење)" }, price: "200" },
       { name: { SQ: "Magic Burger", EN: "Magic Burger", MK: "Меџик Бургер" }, desc: { SQ: "(proshut & kashkavall)", EN: "(ham & kashkaval)", MK: "(шунка и кашкавал)" }, price: "220" },
       { name: { SQ: "Suxhuk Burger", EN: "Sujuk Burger", MK: "Суџук Бургер" }, price: "140" },
-      { name: { SQ: "Qebap", EN: "Kebab", MK: "Ќебап" }, price: "250/300" },
+      { name: { SQ: "Qebap", EN: "Kebab", MK: "Ќебап" }, desc: { SQ: "(në porcion +30 den)", EN: "(in plate +30 den)", MK: "(во порција +30 ден)" }, price: "250" },
       { name: { SQ: "Qofte shtëpie", EN: "Homemade Meatballs", MK: "Домашни ќофтиња" }, price: "330" },
       { name: { SQ: "Pljeskavic Sharri", EN: "Pljeskavica Sharri", MK: "Плескавица Шарри" }, price: "270" },
       { name: { SQ: "File Pule", EN: "Chicken Fillet", MK: "Пилешко филе" }, price: "170" },
